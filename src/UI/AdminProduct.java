@@ -290,7 +290,7 @@ public class AdminProduct extends javax.swing.JFrame {
         });
         Wrapper__JScrollPane.setViewportView(Table);
 
-        Wrapper.add(Wrapper__JScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 900, 350));
+        Wrapper.add(Wrapper__JScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 900, 350));
 
         Wrapper__VerticalBar.setBackground(new java.awt.Color(198, 249, 249));
 
