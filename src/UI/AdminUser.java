@@ -279,6 +279,9 @@ public class AdminUser extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ReturnBtnMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ReturnBtnMouseExited(evt);
+            }
         });
 
         javax.swing.GroupLayout VerticalBarLayout = new javax.swing.GroupLayout(VerticalBar);
@@ -326,9 +329,7 @@ public class AdminUser extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0))
         );
 
@@ -410,6 +411,12 @@ public class AdminUser extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon(iconURL);
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnMouseEntered
+
+    private void ReturnBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseExited
+        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Normal_Return.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        ReturnBtn.setIcon(img);
+    }//GEN-LAST:event_ReturnBtnMouseExited
 
     public void setPositionForWin(int x, int y) {                                            
         this.setLocation(x, y);

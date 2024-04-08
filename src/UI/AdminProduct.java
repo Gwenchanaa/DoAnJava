@@ -302,6 +302,9 @@ public class AdminProduct extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ReturnBtnMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ReturnBtnMouseExited(evt);
+            }
         });
 
         javax.swing.GroupLayout Wrapper__VerticalBarLayout = new javax.swing.GroupLayout(Wrapper__VerticalBar);
@@ -813,6 +816,12 @@ public class AdminProduct extends javax.swing.JFrame {
             showData();
         }
     }//GEN-LAST:event_UpdateButtonClicked
+
+    private void ReturnBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseExited
+        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Normal_Return.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        ReturnBtn.setIcon(img);
+    }//GEN-LAST:event_ReturnBtnMouseExited
 
     private ImageIcon convertPathToImage(String Path) {
         System.out.println(Path);
