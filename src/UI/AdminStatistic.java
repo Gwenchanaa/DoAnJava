@@ -7,11 +7,12 @@ package UI;
 import BUS.ThongkeBUS;
 import Model.StatisticProduct;
 import java.net.URL;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 
 public class AdminStatistic extends javax.swing.JFrame {
 
@@ -28,6 +29,7 @@ public class AdminStatistic extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         jPanel4 = new javax.swing.JPanel();
         HeadBar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,14 +42,13 @@ public class AdminStatistic extends javax.swing.JFrame {
         Chart = new javax.swing.JPanel();
         VerticalBar = new javax.swing.JPanel();
         ReturnBtn = new javax.swing.JLabel();
-        t1 = new javax.swing.JTextField();
-        t2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
+        start = new com.toedter.calendar.JDateChooser();
+        end = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -76,7 +77,7 @@ public class AdminStatistic extends javax.swing.JFrame {
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
         jLabel17.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
-        jLabel17.setText("Quản lí loại sản phẩm");
+        jLabel17.setText("Thống kê ");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/lotus26px.png"))); // NOI18N
 
@@ -100,9 +101,9 @@ public class AdminStatistic extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addGap(167, 167, 167)
+                .addGap(224, 224, 224)
                 .addComponent(jLabel17)
-                .addGap(242, 242, 242)
+                .addGap(185, 185, 185)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,11 +121,13 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(HeadBarLayout.createSequentialGroup()
                 .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
                     .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel4)
                         .addComponent(cancel)
-                        .addComponent(jLabel8)))
+                        .addComponent(jLabel8))
+                    .addGroup(HeadBarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel17)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -177,17 +180,9 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addContainerGap(1376, Short.MAX_VALUE))
         );
 
-        t1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t1ActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("BD");
 
         jLabel3.setText("KT");
-
-        jLabel5.setText("DD-MM-YYYY (01-01-2004)");
 
         Table.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -218,12 +213,13 @@ public class AdminStatistic extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -233,25 +229,28 @@ public class AdminStatistic extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ShowTable, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(176, 176, 176)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(Chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ShowTable, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                            .addComponent(end, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,16 +265,14 @@ public class AdminStatistic extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
                                 .addComponent(ShowTable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addGap(2, 2, 2)
-                                .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(end, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -288,49 +285,32 @@ public class AdminStatistic extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_cancelMouseClicked
+    private void ReturnBtnExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnExit
+        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Normal_Return.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        ReturnBtn.setIcon(img);
+    }//GEN-LAST:event_ReturnBtnExit
 
-    private void HeadBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeadBarMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-
-        this.setLocation(x - MousepX, y - MousepY);
-    }//GEN-LAST:event_HeadBarMouseDragged
-
-    private void HeadBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeadBarMousePressed
-        MousepX = evt.getX();
-        MousepY = evt.getY();
-    }//GEN-LAST:event_HeadBarMousePressed
-
-    private void ShowTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowTableActionPerformed
-        try {
-        Chart.setVisible(false);
-       
-        //get start voi end
-        Date start = new Date(1234567880000L) ;
-        Date end = new Date(1234567890000L);
-        
-            ArrayList<StatisticProduct> list = tkBUS.getStatisticProducts(start, end);
-            loadStatisticProducts(list);
-             jPanel1.setVisible(true);
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            
-        }
-
-    }//GEN-LAST:event_ShowTableActionPerformed
+    private void ReturnBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseEntered
+        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Enter_Return.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        ReturnBtn.setIcon(img);
+    }//GEN-LAST:event_ReturnBtnMouseEntered
 
     private void ReturnBtnhome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnhome
         AdminHome a = new AdminHome();
@@ -340,21 +320,39 @@ public class AdminStatistic extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
 
-    private void ReturnBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseEntered
-        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Enter_Return.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        ReturnBtn.setIcon(img);
-    }//GEN-LAST:event_ReturnBtnMouseEntered
+    private void ShowTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowTableActionPerformed
+        try {
+            Chart.setVisible(false);
 
-    private void ReturnBtnExit(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnExit
-        URL iconURL = getClass().getResource("/icon/Vertical_Bar_Normal_Return.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        ReturnBtn.setIcon(img);
-    }//GEN-LAST:event_ReturnBtnExit
+            //get start voi end
+            Date bd =  start.getDate();
+            
+            Date kt = end.getDate();
 
-    private void t1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t1ActionPerformed
+            ArrayList<StatisticProduct> list = tkBUS.getStatisticProducts(bd,kt );
+            loadStatisticProducts(list);
+            jPanel1.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_ShowTableActionPerformed
+
+    private void HeadBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeadBarMousePressed
+        MousepX = evt.getX();
+        MousepY = evt.getY();
+    }//GEN-LAST:event_HeadBarMousePressed
+
+    private void HeadBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeadBarMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - MousepX, y - MousepY);
+    }//GEN-LAST:event_HeadBarMouseDragged
+
+    private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_cancelMouseClicked
 
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
@@ -379,18 +377,18 @@ public class AdminStatistic extends javax.swing.JFrame {
     private javax.swing.JTable Table;
     private javax.swing.JPanel VerticalBar;
     private javax.swing.JLabel cancel;
+    private com.toedter.calendar.JDateChooser end;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField t1;
-    private javax.swing.JTextField t2;
+    private com.toedter.calendar.JDateChooser start;
     // End of variables declaration//GEN-END:variables
  public void loadStatisticProducts(ArrayList<StatisticProduct> list) {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
