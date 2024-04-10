@@ -8,73 +8,59 @@ package model;
  *
  * @author CUONG
  */
-
+/*INSERT INTO [dbo].[Orders]
+           ([OrderID]
+           ,[UserID]
+           ,[CustomerID]
+           ,[OrderDate])
+     VALUES
+           (<OrderID, nvarchar(7),>
+           ,<UserID, nvarchar(7),>
+           ,<CustomerID, nvarchar(7),>
+           ,<OrderDate, date,>)*/
 public class Order {
-    private int MADONHANG;
-    private int MAKH;
-    private int MASP;
-    private int TONGSOLUONG;
-    private String NGAYTAOHD;
-    private double TONGTIEN;
+           String orderid,userid,customerid,orderdate;
 
     public Order() {
     }
 
-    public Order(int MADONHANG, int MAKH, int MASP, int TONGSOLUONG, String NGAYTAOHD, double TONGTIEN) {
-        this.MADONHANG = MADONHANG;
-        this.MAKH = MAKH;
-        this.MASP = MASP;
-        this.TONGSOLUONG = TONGSOLUONG;
-        this.NGAYTAOHD = NGAYTAOHD;
-        this.TONGTIEN = TONGTIEN;
+    public Order(String orderid, String userid, String customerid, String orderdate) {
+        this.orderid = orderid;
+        this.userid = userid;
+        this.customerid = customerid;
+        this.orderdate = orderdate;
     }
 
-    public int getMADONHANG() {
-        return MADONHANG;
+    public String getOrderid() {
+        return orderid;
     }
 
-    public void setMADONHANG(int MADONHANG) {
-        this.MADONHANG = MADONHANG;
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
     }
 
-    public int getMAKH() {
-        return MAKH;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setMAKH(int MAKH) {
-        this.MAKH = MAKH;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public int getMASP() {
-        return MASP;
+    public String getCustomerid() {
+        return customerid;
     }
 
-    public void setMASP(int MASP) {
-        this.MASP = MASP;
+    public void setCustomerid(String customerid) {
+        this.customerid = customerid;
     }
 
-    public int getTONGSOLUONG() {
-        return TONGSOLUONG;
+    public String getOrderdate() {
+        return orderdate;
     }
 
-    public void setTONGSOLUONG(int TONGSOLUONG) {
-        this.TONGSOLUONG = TONGSOLUONG;
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
     }
-
-    public String getNGAYTAOHD() {
-        return NGAYTAOHD;
-    }
-
-    public void setNGAYTAOHD(String NGAYTAOHD) {
-        this.NGAYTAOHD = NGAYTAOHD;
-    }
-
-    public double getTONGTIEN() {
-        return TONGTIEN;
-    }
-
-    public void setTONGTIEN(double TONGTIEN) {
-        this.TONGTIEN = TONGTIEN;
-    }
-    
+           
 }

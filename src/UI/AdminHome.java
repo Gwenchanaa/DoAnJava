@@ -586,12 +586,12 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_HeadBarMousePressed
 
     private void panel_statisticGoToAdminStatistic(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_statisticGoToAdminStatistic
-        AdminStatistic a = new AdminStatistic();
-        a.setVisible(true);
-        x = this.getX();
-        y = this.getY();
-        a.setPositionForWin(x, y);
-        dispose();
+//        AdminStatistic a = new AdminStatistic();
+//        a.setVisible(true);
+//        x = this.getX();
+//        y = this.getY();
+//        a.setPositionForWin(x, y);
+//        dispose();
     }//GEN-LAST:event_panel_statisticGoToAdminStatistic
 
     private void panel_statisticenteredStatic(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_statisticenteredStatic
