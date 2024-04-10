@@ -4,6 +4,7 @@ import DataCon.JDBC;
 import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ReceiptDAO {
 
@@ -54,23 +55,161 @@ public class ReceiptDAO {
         return i;
     }
 
+    public int delete(Receipt r) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "delete  from Receipts "
+                    + "where ReceiptID = '" + r.getReceiptID() + "' ";
+            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+            System.out.println(kq + " thay doi");
+            if (kq != 0) {
+//                JOptionPane.showMessageDialog(null, "Xóa thành công", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int UpdateProduct(String s) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update [dbo].[Products]\n"
+                    + "set ProductQuantity = ProductQuantity + r.ReceiptQuantity\n"
+                    + "from [dbo].[Products] as p\n"
+                    + "join [dbo].[ReceiptDetails] as r\n"
+                    + "on p.ProductID = r.ProductID "
+                    + "where ReceiptID = '" + s + "'";
+
+            int kq = st.executeUpdate(sql);
+            JDBC.closeConnection(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public String creatReceiptID() {
         String i = "";
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
-            String sql = "select count(*) as num "
-                    + "from Receipts ";
+            String sql = "select top 1 ReceiptID\n"
+                    + "from Receipts\n"
+                    + "order by ReceiptID desc ";
             System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
-                int count = rs.getInt("num");
-                i = "PN" + count;
+                String a = rs.getString("ReceiptID");
+                a = a.substring(2);
+                int num = Integer.valueOf(a);
+                num++;
+                i = "PN" + num;
+            }
+            if (i.equals("")) {
+                i = "PN0";
             }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return i;
+    }
+
+    // cho cột tổng bill vô
+    public int updateReceiptTotalPrice(String ReceiptID, double ReceiptPrice) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update Receipts "
+                    + "set "
+                    + "TotalPrice = '" + ReceiptPrice + "' "
+                    + "where ReceiptID = '" + ReceiptID + "'";
+            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+            System.out.println(kq + " thay đổi");
+            JDBC.closeConnection(c);
+//            if (kq == 0) {
+//                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Sửa thành công " + t.getProductID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+//            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int update(Receipt r) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update Receipts "
+                    + "set "
+                    + "ReceiptCompany = '" + r.getReceiptCompany() + "', "
+                    + "UserID = '" + r.getUserID() + "', "
+                    + "ReceiptDate = '" + r.getReceiptDate() + "' "
+                    + "where ReceiptID = '" + r.getReceiptID() + "'";
+            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+            System.out.println(kq + " thay đổi");
+            JDBC.closeConnection(c);
+//            if (kq == 0) {
+//                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Sửa thành công " + t.getProductID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+//            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<Receipt> getDataForTableReceipt() {
+        ArrayList<Receipt> list = new ArrayList<>();
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "select * from Receipts";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                String ReceiptID = rs.getString("ReceiptID");
+                String ReceiptCompany = rs.getString("ReceiptCompany");
+                String UserID = rs.getString("UserID");
+                String ReceiptDate = rs.getDate("ReceiptDate").toString();
+                Receipt r = new Receipt(ReceiptID, ReceiptCompany, UserID, ReceiptDate);
+                r.toString();
+                list.add(r);
+            }
+            JDBC.closeConnection(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public String DisplayBillReceipt(String ID) {
+        String moneyStr = "";
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "select TotalPrice from Receipts\n"
+                    + "where ReceiptID = '"+ID+"'";
+            System.out.println(sql);
+            ResultSet rs = st.executeQuery(sql);
+            rs.next();
+            double money = rs.getDouble("TotalPrice");
+            moneyStr = String.valueOf(money);
+            moneyStr = moneyStr +" Đ";
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return moneyStr;
     }
 }

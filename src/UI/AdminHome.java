@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 
 import java.awt.Color;
 
-/**
- *
- * @author ACER
- */
 public class AdminHome extends javax.swing.JFrame {
 
     public AdminHome() {
@@ -608,8 +600,6 @@ public class AdminHome extends javax.swing.JFrame {
         x = this.getX();
         y = this.getY();
         a.setPositionForWin(x, y);
-        a.showDataLeftTable();
-        a.showGreyText();
         dispose();
     }//GEN-LAST:event_GoToReceipt
 

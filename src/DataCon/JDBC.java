@@ -5,37 +5,34 @@ import java.sql.*;
 public class JDBC {
 
     public static Connection getConnection() {
-        Connection c = null;
-        String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=leatherManagerSystem1;trustServerCertificate=true";
-        String username = "sa";
-        String password = "12345";
+        Connection conn = null;
 
-        if (c == null) {
+        String url = "jdbc:sqlserver://LAPTOP-VNOPB5Q7\\SQLEXPRESS:1433; databaseName=Hello;user=sa;password=123;"
+                + "encrypt=true;trustServerCertificate=true";
+        if (conn == null) {
             try {
                 //step 1: craete connection
-                c = DriverManager.getConnection(dbUrl, username, password);
-//                System.out.println("Connection is established with " + c.getCatalog());
+                conn = DriverManager.getConnection(url);
+                System.out.println("Connection is established with " + conn.getCatalog());
 
             } catch (SQLException ex) {
-                System.out.println("Connection lost by " + ex);
+                System.out.println("Connection lost =(" + ex);
             }
         }
-        return c;
+        return conn;
     }
+       
 
     public static void closeConnection(Connection c) {
-        try {
-            if (c != null) {
+        try{
+            if(c != null){
                 c.close();
-//                System.out.println("Connection is closed !!!");
+                System.out.println("Connection is closed !!!");
             }
-        } catch (SQLException e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
-    public static void main(String[] args) {
-        Connection c = getConnection();
-    }
 }
+

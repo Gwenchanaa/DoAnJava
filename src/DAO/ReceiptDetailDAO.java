@@ -32,12 +32,31 @@ public class ReceiptDetailDAO {
         return i;
     }
 
-    public int delete(String ProductID) {
+    public int deleteTable1(String ReceiptID) {
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
             String sql = "delete  from ReceiptDetails "
-                    + "where ProductID = '" + ProductID + "'";
+                    + "where ProductID = '" + ReceiptID + "'";
+            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+            System.out.println(kq + " thay doi");
+            if (kq != 0) {
+                JOptionPane.showMessageDialog(null, "Xóa thành công ", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int delete(String ReceiptID) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "delete  from ReceiptDetails "
+                    + "where ReceiptID = '" + ReceiptID + "'";
             System.out.println(sql);
             int kq = st.executeUpdate(sql);
             System.out.println(kq + " thay doi");
@@ -86,12 +105,65 @@ public class ReceiptDetailDAO {
                     + "from [dbo].[Products] as p\n"
                     + "join [dbo].[ReceiptDetails] as r\n"
                     + "on p.ProductID = r.ProductID "
-                    + "where ReceiptID = '" + s +"'";
+                    + "where ReceiptID = '" + s + "'";
 
             int kq = st.executeUpdate(sql);
             JDBC.closeConnection(c);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<Object[]> BillPhieuNhap(String ID) {
+        ArrayList<Object[]> list = new ArrayList<>();
+        try {
+            Connection c = JDBC.getConnection();
+            Statement St = c.createStatement();
+            String sql = "select ProductName, ReceiptQuantity, ReceiptPrice \n"
+                    + "from (ReceiptDetails as con \n"
+                    + "join Receipts as cha\n"
+                    + "on cha.ReceiptID = con.ReceiptID)\n"
+                    + "join Products as p\n"
+                    + "on p.ProductID = con.ProductID "
+                    + "where cha.ReceiptID = '" + ID + "' ";
+
+            ResultSet rs = St.executeQuery(sql);
+            while (rs.next()) {
+                String name = rs.getString("ProductName");
+                int sl = rs.getInt("ReceiptQuantity");
+                double gia = rs.getDouble("ReceiptPrice");
+
+                list.add(new Object[]{name, sl, gia});
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public int deletePhieuNhap(String ReceiptID) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update Products\n"
+                    + "set ProductQuantity = ProductQuantity - ReceiptQuantity\n"
+                    + "FROM (Receipts\n"
+                    + "JOIN ReceiptDetails \n"
+                    + "ON Receipts.ReceiptID = ReceiptDetails.ReceiptID)\n"
+                    + "join Products\n"
+                    + "on ReceiptDetails.ProductID = Products.ProductID \n"
+                    + "where Receipts.ReceiptID = '" + ReceiptID +"'";
+            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+            System.out.println(kq + " thay doi");
+            if (kq != 0) {
+                JOptionPane.showMessageDialog(null, "Hoàn hàng", "CANCEL SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return 0;
     }

@@ -4,16 +4,64 @@
  */
 package UI;
 
+import DAL.DaoCustomer;
+import DAL.DaoOrder;
+import static UI.AdminCustomer.containsLetters;
 import java.net.URL;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import model.Customer;
+import model.Order;
 
 public class AdminOrder extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminOrder
      */
+    private static JTable table;
+    DaoOrder dal = new DaoOrder();
+    int j;
+
+    List<Order> container = new ArrayList<>();
+
     public AdminOrder() {
         initComponents();
+        showData(dal.getAll());
+
+    }
+
+    public static boolean containsLetters(String input) {
+        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
+    }
+
+    public void showData(List<Order> customer1) {
+        List<Order> ListCustomer = new ArrayList<>();
+        ListCustomer = customer1;
+        DefaultTableModel table = (DefaultTableModel) bang.getModel();
+        table.setRowCount(0);
+        ListCustomer.forEach((order) -> {
+            table.addRow(new Object[]{
+                order.getOrderid(),
+                order.getUserid(),
+                order.getCustomerid(),
+                order.getOrderdate(),});
+
+            container.add(order);
+
+        });
+
     }
     int MousepX, MousepY;
 
@@ -51,16 +99,20 @@ public class AdminOrder extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         CustomerID = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bang = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
-        MinusButton = new javax.swing.JLabel();
-        UpdateButton = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        search = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         AddButton = new javax.swing.JLabel();
+        UpdateButton = new javax.swing.JLabel();
+        MinusButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(234, 252, 252));
+        jPanel1.setPreferredSize(new java.awt.Dimension(906, 600));
 
         VerticalBar.setBackground(new java.awt.Color(198, 249, 249));
 
@@ -166,9 +218,9 @@ public class AdminOrder extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancel)
-                .addGap(71, 71, 71))
+                .addContainerGap())
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,47 +333,73 @@ public class AdminOrder extends javax.swing.JFrame {
                 .addGap(148, 148, 148))
         );
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bang.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        bang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID đơn hàng", "Ngày lên đơn", "ID người bán", "ID khách hàng"
+                "ID đơn hàng", "ID Người bán", "CustomerID", "Ngày Tạo Đơn"
             }
         ));
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setGridColor(new java.awt.Color(51, 51, 51));
-        jTable1.setRowHeight(40);
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        bang.setFillsViewportHeight(true);
+        bang.setGridColor(new java.awt.Color(51, 51, 51));
+        bang.setRowHeight(40);
+        bang.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        bang.setShowGrid(true);
+        bang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(bang);
 
         jPanel8.setBackground(new java.awt.Color(234, 252, 252));
 
-        MinusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalMinus.png"))); // NOI18N
-        MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MinusButtonminusEnter(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                MinusButtonminusNormal(evt);
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-search-100.png"))); // NOI18N
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
             }
         });
 
-        UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalUpdate.png"))); // NOI18N
-        UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                UpdateButtonupdateEnter(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                UpdateButtonupdateNormal(evt);
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/showwwall.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
         AddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalAdd.png"))); // NOI18N
         AddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 AddButtonplusEnter(evt);
             }
@@ -330,43 +408,58 @@ public class AdminOrder extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AddButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(UpdateButton)
-                .addGap(48, 48, 48)
-                .addComponent(MinusButton))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(AddButton)
-                        .addComponent(MinusButton))
-                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalUpdate.png"))); // NOI18N
+        UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdateButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                UpdateButtonupdateEnter(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                UpdateButtonupdateNormal(evt);
+            }
+        });
+
+        MinusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalMinus.png"))); // NOI18N
+        MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MinusButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                MinusButtonminusEnter(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MinusButtonminusNormal(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(440, 440, 440)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(AddButton)
+                        .addGap(36, 36, 36)
+                        .addComponent(UpdateButton)
+                        .addGap(36, 36, 36)
+                        .addComponent(MinusButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,18 +474,30 @@ public class AdminOrder extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 896, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -494,10 +599,163 @@ public class AdminOrder extends javax.swing.JFrame {
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnExit
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void setPositionForWin(int x, int y) {                                            
+    private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
+        // TODO add your handling code here:
+        boolean check = false;
+        if (CustomerID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CustomerID.requestFocus();
+        } else if (OrderDate.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            OrderDate.requestFocus();
+        } else if (UserID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            UserID.requestFocus();
+        } else if (CustomerID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CustomerID.requestFocus();
+        } else {
+            {
+                check = true;
+            }
+
+            if (check == true) {
+                Order nv = new Order();
+                nv.setOrderid(CustomerID.getText());
+                nv.setUserid(UserID.getText());
+
+                nv.setCustomerid(CustomerID.getText());
+                nv.setOrderdate(OrderDate.getText());
+
+                try {
+                    j = dal.insert(nv);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AdminOrder.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (j == 0) {
+                    JOptionPane.showMessageDialog(null, "insert sucssec");
+
+                }
+                if (j == 1) {
+                    CustomerID.setText("");
+                    CustomerID.requestFocus();
+                    JOptionPane.showMessageDialog(null, "Chua ton tai khach hang hoac Chua ton tai user ");
+                }
+                if (j == 2) {
+                    JOptionPane.showMessageDialog(null, "trung id so" + nv.getOrderid() + "");
+                    CustomerID.setText("");
+                    CustomerID.requestFocus();
+                }
+                showData(dal.getAll());
+                System.out.println("kk");
+
+                CustomerID.setText("");
+                OrderDate.setText("");
+                CustomerID.setText("");
+                UserID.setText("");
+
+            }
+        }
+
+
+    }//GEN-LAST:event_AddButtonMouseClicked
+
+    private void UpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonMouseClicked
+        // TODO add your handling code here:
+
+        boolean check = false;
+        if (OrderID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            OrderID.requestFocus();
+        } else if (UserID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            UserID.requestFocus();
+//        } else if (CustomerID.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+//            CustomerID.requestFocus();
+        } else if (OrderDate.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            OrderDate.requestFocus();
+
+        } else {
+            check = true;
+        }
+
+        if (check == true) {
+            Order cus = new Order();
+
+            cus.setOrderid(OrderID.getText());
+            cus.setOrderdate(OrderDate.getText());
+
+//            cus.setCustomerid(CustomerID.getText());
+            cus.setUserid(UserID.getText());
+
+      
+         
+            try {
+                dal.update(cus);
+            } catch (ParseException ex) {
+                Logger.getLogger(AdminOrder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+           
+
+            JOptionPane.showMessageDialog(null, "UPDATE sucseccfull");
+            showData(dal.getAll());
+            CustomerID.setText("");
+            OrderID.setText("");
+            OrderDate.setText("");
+            UserID.setText("");
+
+        }
+
+
+    }//GEN-LAST:event_UpdateButtonMouseClicked
+
+    private void bangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangMouseClicked
+        // TODO add your handling code here:
+        
+           int count = bang.getSelectedRow();
+        TableModel model = bang.getModel();
+        OrderID.setText(model.getValueAt(count, 0).toString());
+        OrderDate.setText(model.getValueAt(count, 3).toString());
+        UserID.setText(model.getValueAt(count, 1).toString());
+        CustomerID.setText(model.getValueAt(count, 2).toString());
+    }//GEN-LAST:event_bangMouseClicked
+
+    private void MinusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinusButtonMouseClicked
+        // TODO add your handling code here:
+        
+            Order cuss = new Order();
+            cuss.setOrderid(OrderID.getText());
+            dal.delete(cuss);
+            JOptionPane.showMessageDialog(null, "delete sucseccfull");
+            showData(dal.getAll());
+            OrderID.setText("");
+            UserID.setText("");
+            CustomerID.setText("");
+            OrderDate.setText("");
+         
+    }//GEN-LAST:event_MinusButtonMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        
+          Order cuss = new Order();
+        cuss.setOrderid(search.getText());
+
+        showData(dal.finCustomersByName(cuss));
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -547,7 +805,10 @@ public class AdminOrder extends javax.swing.JFrame {
     private javax.swing.JLabel UpdateButton;
     private javax.swing.JTextField UserID;
     private javax.swing.JPanel VerticalBar;
+    private javax.swing.JTable bang;
     private javax.swing.JLabel cancel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -564,6 +825,6 @@ public class AdminOrder extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }
