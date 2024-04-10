@@ -83,7 +83,7 @@ public class DaoOrder extends DAOCONTENT {
 
     public void delete(Order or) {
         String sql = "DELETE FROM [dbo].[Orders]\n"
-                + "      WHERE UserId= '" + or.getUserid() + "'";
+                + "      WHERE OrderId= '" + or.getOrderid()+ "'";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -93,24 +93,49 @@ public class DaoOrder extends DAOCONTENT {
         }
     }
 
-//    public void update(Order order) {
-//
-//        String sql = "UPDATE [dbo].[Orders]\n"
-//                + "   SET [OrderID] = \n"
-//                + "      ,[UserID] = \n"
-//                + "      ,[CustomerID] = \n"
-//                + "      ,[OrderDate] = \n"
-//                + " WHERE ";
-//        try {
-//            PreparedStatement st = connection.prepareStatement(sql);
-//            st.setInt(1, cuss.getCustomerId());
-//            st.setString(2, cuss.getCustomerName());
-//            st.setString(3, cuss.getCustomerPhone());
-//            st.setString(4, cuss.getCustomerAddress());
-//
-//            st.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//    }
+    public void update(Order orders) throws ParseException  {
+
+        String sql = "UPDATE [dbo].[Orders]\n"
+                + "   SET [OrderID] = ?\n"
+                + "      ,[UserID] = ?\n"
+                + "      ,[CustomerId] = ?\n"
+                + "      ,[OrderDate] = ?\n"
+                + " WHERE OrderID = '"+orders.getOrderid()+"'";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date utilDate = dateFormat.parse(orders.getOrderdate());
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+              System.out.println(sqlDate);
+//            int cus=  Integer.parseInt(orders.getCustomerid());
+            st.setString(1, orders.getOrderid());
+            st.setString(2, orders.getUserid());
+            st.setString(3, orders.getCustomerid());
+//            st.setInt(4,cus );
+            st.setDate(4, sqlDate);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+     public List<Order> finCustomersByName(Order c) {
+        List<Order> list = new ArrayList<>();
+        String sql = "select * from orders where orders.orderid like'%" + c.getOrderid()+ "%'";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                c = new Order(rs.getString("OrderID"), rs.getString("UserID"),
+                        rs.getString("CustomerID"), rs.getString("OrderDate"));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+
+    }
+
 }

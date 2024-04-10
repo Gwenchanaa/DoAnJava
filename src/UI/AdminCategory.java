@@ -4,13 +4,57 @@
  */
 package UI;
 
+import DAL.DaoCaterory;
+import DAL.DaoOrder;
+import static UI.AdminCustomer.containsLetters;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import model.Catergory;
+import model.Customer;
+import model.Order;
 
 public class AdminCategory extends javax.swing.JFrame {
+    
+        private static JTable table;
+    DaoCaterory dal = new DaoCaterory();
+    int j;
+
+    List<Catergory> container = new ArrayList<>();
 
     public AdminCategory() {
         initComponents();
+        showData(dal.getAll());
+    }
+    
+    public static boolean containsLetters(String input) {
+        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
+    }
+
+    public void showData(List<Catergory> customer1) {
+        List<Catergory> ListCustomer = new ArrayList<>();
+        ListCustomer = customer1;
+        DefaultTableModel table = (DefaultTableModel) bang.getModel();
+        table.setRowCount(0);
+        ListCustomer.forEach((Category) -> {
+            table.addRow(new Object[]{
+                Category.getId(),
+                Category.getName(),
+                });
+
+            container.add(Category);
+
+        });
+
     }
     int MousepX, MousepY;
 
@@ -37,11 +81,14 @@ public class AdminCategory extends javax.swing.JFrame {
         CategoryName = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bang = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         MinusButton = new javax.swing.JLabel();
         UpdateButton = new javax.swing.JLabel();
         AddButton = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        search = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -131,9 +178,8 @@ public class AdminCategory extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(cancel)
-                .addGap(123, 123, 123))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +261,9 @@ public class AdminCategory extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bang.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        bang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -225,20 +271,28 @@ public class AdminCategory extends javax.swing.JFrame {
                 "ID loại", "Tên loại"
             }
         ));
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setGridColor(new java.awt.Color(51, 51, 51));
-        jTable1.setRowHeight(40);
-        jTable1.setRowMargin(2);
-        jTable1.setRowSelectionAllowed(false);
-        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 255, 51));
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        bang.setFillsViewportHeight(true);
+        bang.setGridColor(new java.awt.Color(51, 51, 51));
+        bang.setRowHeight(40);
+        bang.setRowMargin(2);
+        bang.setRowSelectionAllowed(false);
+        bang.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        bang.setSelectionForeground(new java.awt.Color(0, 255, 51));
+        bang.setShowGrid(true);
+        bang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bangMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(bang);
 
         jPanel8.setBackground(new java.awt.Color(234, 252, 252));
 
         MinusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalMinus.png"))); // NOI18N
         MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MinusButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 minusEnter(evt);
             }
@@ -249,6 +303,9 @@ public class AdminCategory extends javax.swing.JFrame {
 
         UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalUpdate.png"))); // NOI18N
         UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdateButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 updateEnter(evt);
             }
@@ -259,6 +316,9 @@ public class AdminCategory extends javax.swing.JFrame {
 
         AddButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalAdd.png"))); // NOI18N
         AddButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 plusEnter(evt);
             }
@@ -272,29 +332,42 @@ public class AdminCategory extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(AddButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(UpdateButton)
-                .addGap(48, 48, 48)
-                .addComponent(MinusButton))
+                .addGap(18, 18, 18)
+                .addComponent(MinusButton)
+                .addGap(53, 53, 53))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(AddButton)
-                        .addComponent(MinusButton))
-                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(MinusButton)
+                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddButton))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/showwwall.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-search-100.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -303,8 +376,16 @@ public class AdminCategory extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,8 +401,19 @@ public class AdminCategory extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(13, 13, 13))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -410,6 +502,137 @@ public class AdminCategory extends javax.swing.JFrame {
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnExited
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
+        // TODO add your handling code here:
+        
+        boolean check = false;
+        if (CategoryID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CategoryID.requestFocus();
+        } else if (CategoryName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CategoryName.requestFocus();
+        }
+        
+
+        else {
+            {
+                check = true;
+            }
+
+            if (check == true) {
+                Catergory nv = new Catergory();
+                nv.setId(Integer.parseInt(CategoryID.getText()));
+                nv.setName(CategoryName.getText());               
+               
+             
+
+               
+
+              
+                        j = dal.insert(nv);
+                    
+
+                    if (j == 0) {
+                        JOptionPane.showMessageDialog(null, "insert sucssec");
+
+                    }
+                    if (j == 1) {
+                        CategoryID.setText("");
+                        CategoryID.requestFocus();
+                        JOptionPane.showMessageDialog(null, "Không tồn tại ");
+                    }
+                    if (j == 2) {
+                        JOptionPane.showMessageDialog(null, "trung id so" + nv.getId()+ "");
+                        CategoryID.setText("");
+                        CategoryID.requestFocus();
+                    }
+                    showData(dal.getAll());
+                    System.out.println("kk");
+
+                    CategoryID.setText("");
+                    CategoryName.setText("");
+               
+     
+
+                }
+            }
+        
+    }//GEN-LAST:event_AddButtonMouseClicked
+
+    private void UpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonMouseClicked
+        // TODO add your handling code here:
+        
+        boolean check = false;
+        if (CategoryID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CategoryID.requestFocus();
+        } else if (CategoryName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
+            CategoryName.requestFocus();
+        } else {
+            check = true;
+        }
+
+        if (check == true) {
+            Catergory cus = new Catergory();
+
+            cus.setId(Integer.parseInt(CategoryID.getText()));
+            cus.setName(CategoryName.getText());
+          
+           
+               
+                    dal.update(cus);
+                
+                JOptionPane.showMessageDialog(null, "UPDATE sucseccfull");
+                showData(dal.getAll());
+                CategoryID.setText("");
+                CategoryName.setText("");
+          
+            }
+
+        
+    }//GEN-LAST:event_UpdateButtonMouseClicked
+
+    private void MinusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinusButtonMouseClicked
+        // TODO add your handling code here:
+         Catergory cuss = new Catergory();
+            cuss.setId(Integer.parseInt(CategoryID.getText()));
+            dal.delete(cuss);
+            JOptionPane.showMessageDialog(null, "delete sucseccfull");
+            showData(dal.getAll());
+            CategoryID.setText("");
+            CategoryName.setText("");
+      
+       
+        
+    }//GEN-LAST:event_MinusButtonMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+         Catergory cuss = new Catergory();
+        cuss.setName(search.getText());
+
+        showData(dal.finCustomersByName(cuss));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangMouseClicked
+        // TODO add your handling code here:
+        
+             int count = bang.getSelectedRow();
+        TableModel model = bang.getModel();
+        CategoryID.setText(model.getValueAt(count, 0).toString());
+        CategoryName.setText(model.getValueAt(count, 1).toString());
+      
+    }//GEN-LAST:event_bangMouseClicked
+
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }
@@ -432,7 +655,10 @@ public class AdminCategory extends javax.swing.JFrame {
     private javax.swing.JLabel ReturnBtn;
     private javax.swing.JLabel UpdateButton;
     private javax.swing.JPanel VerticalBar;
+    private javax.swing.JTable bang;
     private javax.swing.JLabel cancel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -446,7 +672,7 @@ public class AdminCategory extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField search;
     // End of variables declaration//GEN-END:variables
 }

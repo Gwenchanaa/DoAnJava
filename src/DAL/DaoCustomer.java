@@ -78,7 +78,7 @@ public class DaoCustomer extends DAOCONTENT {
 
     public void delete(Customer cuss) {
         String sql = "DELETE FROM [dbo].[Customers]\n"
-                + "      WHERE CustomerName = '" + cuss.getCustomerName() + "'";
+                + "      WHERE CustomerID = '" + cuss.getCustomerId()+ "'";
 
         try {
             PreparedStatement st = connection.prepareStatement(sql);
