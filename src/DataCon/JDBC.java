@@ -6,7 +6,7 @@ public class JDBC {
 
     public static Connection getConnection() {
         Connection c = null;
-        String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=leatherManagerSystem1;trustServerCertificate=true";
+        String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=leatherManagerSystem;trustServerCertificate=true";
         String username = "sa";
         String password = "12345";
 

@@ -465,6 +465,11 @@ public class AdminReceipt extends javax.swing.JFrame {
                 ImportBtnClicked(evt);
             }
         });
+        ImportBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportBtnActionPerformed(evt);
+            }
+        });
         Wrapper.add(ImportBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -542,6 +547,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         String UserID = TextUserID.getText();
         String ReceiptCompany = TextReceiptCompany.getText();
         String ReceiptDate = TextReceiptDate.getText();
+        int ReceiptQuantity;
+        double ReceiptPrice;
         boolean check_full_filling = true;
         if (ReceiptCompany.equals("")) {
             TextReceiptCompany.requestFocus();
@@ -552,7 +559,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         }
 
         if (check_full_filling == true) {
-            Receipt r = new Receipt(ReceiptID, ReceiptCompany, UserID, ReceiptDate);
+            Receipt r = new Receipt(ReceiptID, ReceiptCompany, UserID, ReceiptDate, ReceiptQuantity, ReceiptPrice);
             int i = ReceiptDAO.getInstance().add(r);
             if (i == 0) {
                 JOptionPane.showMessageDialog(null, "Tạo thành công phôi đơn nhập", "SUCCESS ADD", JOptionPane.INFORMATION_MESSAGE);
@@ -651,6 +658,10 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__input.setVisible(true);
         Wrapper__Buttons.setVisible(true);
     }//GEN-LAST:event_ImportBtnClicked
+
+    private void ImportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ImportBtnActionPerformed
 
     public void showDataLeftTable() {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
