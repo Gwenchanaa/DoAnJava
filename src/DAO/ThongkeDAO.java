@@ -3,6 +3,7 @@ package DAO;
 import DataCon.JDBC;
 import Model.Product;
 import Model.StatisticProduct;
+import Model.StatisticReceipt;
 import UI.AdminProduct;
 import java.sql.*;
 import java.util.ArrayList;
@@ -61,5 +62,9 @@ public class ThongkeDAO {
         for (StatisticProduct sp : list) {
             System.out.println(sp.toString());
         }
+    }
+
+    public ArrayList<StatisticReceipt> getStatisticReceipts(Date bd, Date kt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

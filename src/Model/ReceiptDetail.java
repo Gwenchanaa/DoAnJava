@@ -4,10 +4,10 @@ public class ReceiptDetail {
 
     String ReceiptID,
             ProductID;
-    Double ReceiptPrice;
+    double ReceiptPrice;
     int ReceiptQuantity;
 
-    public ReceiptDetail(String ReceiptID, String ProductID, int ReceiptQuantity, Double ReceiptPrice) {
+    public ReceiptDetail(String ReceiptID, String ProductID, int ReceiptQuantity, double ReceiptPrice) {
         this.ReceiptID = ReceiptID;
         this.ProductID = ProductID;
         this.ReceiptPrice = ReceiptPrice;
@@ -30,7 +30,7 @@ public class ReceiptDetail {
         this.ProductID = ProductID;
     }
 
-    public Double getReceiptPrice() {
+    public double getReceiptPrice() {
         return ReceiptPrice;
     }
 
