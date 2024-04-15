@@ -94,6 +94,11 @@ public class ThongkeDAO {
 //                StatisticReceipt rec = new StatisticReceipt(r, ReceiptQuantity, ReceiptPrice);
 //                list1.add(rec);
 
+//                Receipt r = new Receipt(ReceiptID, ProductID, ProductName, ReceiptQuantity, ReceiptPrice, ProductImage);
+          
+//                StatisticReceipt rec = new StatisticReceipt(r, ReceiptQuantity, ReceiptPrice);
+//                list1.add(rec);
+
             }
 
             JDBC.closeConnection(c);
