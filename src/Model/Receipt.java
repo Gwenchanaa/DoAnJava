@@ -4,6 +4,7 @@ public class Receipt {
 
     String ReceiptID, ReceiptCompany, UserID, ReceiptDate;
 
+
     public Receipt(String ReceiptID, String ReceiptCompany, String UserID, String ReceiptDate) {
         this.ReceiptID = ReceiptID;
         this.ReceiptCompany = ReceiptCompany;
@@ -41,11 +42,6 @@ public class Receipt {
 
     public void setReceiptDate(String ReceiptDate) {
         this.ReceiptDate = ReceiptDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Receipt{" + "ReceiptID=" + ReceiptID + ", ReceiptCompany=" + ReceiptCompany + ", UserID=" + UserID + ", ReceiptDate=" + ReceiptDate + '}';
     }
 
 }
