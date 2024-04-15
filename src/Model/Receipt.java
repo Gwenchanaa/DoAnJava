@@ -3,6 +3,8 @@ package Model;
 public class Receipt {
 
     String ReceiptID, ReceiptCompany, UserID, ReceiptDate;
+    int ReceiptQuantity;
+    double ReceiptPrice;
 
 
     public Receipt(String ReceiptID, String ReceiptCompany, String UserID, String ReceiptDate) {
@@ -10,6 +12,15 @@ public class Receipt {
         this.ReceiptCompany = ReceiptCompany;
         this.UserID = UserID;
         this.ReceiptDate = ReceiptDate;
+        this.ReceiptQuantity = ReceiptQuantity;
+        this.ReceiptPrice = ReceiptPrice;
+    }
+
+  
+
+    @Override
+    public String toString() {
+        return "Receipt{" + "ReceiptID=" + ReceiptID + ", ReceiptCompany=" + ReceiptCompany + ", UserID=" + UserID + ", ReceiptDate=" + ReceiptDate + ", ReceiptQuantity=" + ReceiptQuantity + ", ReceiptPrice=" + ReceiptPrice + '}';
     }
 
     public String getReceiptID() {
