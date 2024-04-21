@@ -32,6 +32,8 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
 
         ScrollPane1 = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
+        sum = new java.awt.Label();
+        sum1 = new java.awt.Label();
 
         Table1.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         Table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -39,7 +41,7 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ProductID", "Product", "Quantity", "Income"
+                "Mã sản phẩm", "Sản phẩm", "Số lượng", "Thu nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -57,15 +59,29 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
         Table1.setShowGrid(true);
         ScrollPane1.setViewportView(Table1);
 
+        sum.setText("Tổng thu nhập :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sum1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(ScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -80,8 +96,20 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
             model.addRow(rowData);
         }
     }
+ public void loadSum(ArrayList<StatisticProduct> list) {
+       
+        float S = 0;
+        for (StatisticProduct sp : list) {
+          S += sp.getIncome();
+           
+        }
+        sum1.setText(String.format("%.2f vnd", S));
+    }
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane1;
     private javax.swing.JTable Table1;
+    private java.awt.Label sum;
+    private java.awt.Label sum1;
     // End of variables declaration//GEN-END:variables
 }

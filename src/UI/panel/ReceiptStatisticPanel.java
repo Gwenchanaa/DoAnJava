@@ -5,7 +5,7 @@
 package UI.panel;
 
 import Model.StatisticProduct;
-import Model.StatisticReceipt;
+
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,6 +33,8 @@ public class ReceiptStatisticPanel extends javax.swing.JPanel {
 
         ScrollPane = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
+        ScrollPane1 = new javax.swing.JScrollPane();
+        Table1 = new javax.swing.JTable();
 
         Table.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -40,11 +42,11 @@ public class ReceiptStatisticPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ProductID", "Product", "Quantity"
+                "Mã sản phẩm", "Sản phẩm", "Số lượng tồn kho"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false
+                true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -58,31 +60,73 @@ public class ReceiptStatisticPanel extends javax.swing.JPanel {
         Table.setShowGrid(true);
         ScrollPane.setViewportView(Table);
 
+        Table1.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
+        Table1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã Sản phẩm", "Sản phẩm", "Số lượng tồn kho"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Table1.setGridColor(new java.awt.Color(51, 51, 51));
+        Table1.setInheritsPopupMenu(true);
+        Table1.setRowHeight(50);
+        Table1.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        Table1.setShowGrid(true);
+        ScrollPane1.setViewportView(Table1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+            .addComponent(ScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    public void loadStatisticReceipts(ArrayList<StatisticReceipt> list1) {
+    public void loadStatisticReceipts(ArrayList<StatisticProduct> list1) {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         // Xóa tất cả các hàng trong model trước khi load dữ liệu mới
         model.setRowCount(0);
 
 //        // Thêm dữ liệu từ ArrayList vào model
-        for (StatisticReceipt sr : list1) {
-//            Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getQuanity(), sp.getIncome()};
-//            model.addRow(rowData);
+        for (StatisticProduct sp : list1) {
+           Object[] rowData = { sp.getProduct().getProductID(),sp.getProduct().getProductName(),sp.getProduct().getProductQuantity()};
+            model.addRow(rowData);
         }
     }
+   public void load(ArrayList<StatisticProduct> list1) {
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+        // Xóa tất cả các hàng trong model trước khi load dữ liệu mới
+        model.setRowCount(0);
 
+//        // Thêm dữ liệu từ ArrayList vào model
+        for (StatisticProduct sp : list1) {
+            if(sp.getQuanity()==0){
+           Object[] rowData = { sp.getProduct().getProductID(),sp.getProduct().getProductName(),sp.getProduct().getProductQuantity()};
+            model.addRow(rowData);}
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JScrollPane ScrollPane1;
     private javax.swing.JTable Table;
+    private javax.swing.JTable Table1;
     // End of variables declaration//GEN-END:variables
 }

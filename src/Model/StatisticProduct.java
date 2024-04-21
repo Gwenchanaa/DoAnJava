@@ -1,4 +1,4 @@
-package Model;
+  package Model;
 
 import DataCon.JDBC;
 import Model.Product;
@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 public class StatisticProduct {
 
     private Product product;
+     
     private Integer quanity;
     private Float income;
 

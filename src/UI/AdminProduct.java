@@ -639,7 +639,7 @@ public class AdminProduct extends javax.swing.JFrame {
         JLabel label = new JLabel();
         JPanel panelCon = new JPanel();
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("D:\\04.PTTKhttt\\images"));
+        fc.setCurrentDirectory(new File("C:\\Users\\ACER\\Documents\\Zalo Received Files"));
         int res = fc.showOpenDialog(null);
 
         panelCon.setBackground(Color.white);

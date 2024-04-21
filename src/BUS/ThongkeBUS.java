@@ -2,7 +2,6 @@ package BUS;
 
 import DAO.ThongkeDAO;
 import Model.StatisticProduct;
-import Model.StatisticReceipt;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -25,8 +24,12 @@ public class ThongkeBUS {
         return tkDAO.getStatisticProducts(bd, kt);
     }
 
-    public ArrayList<StatisticReceipt> getStatisticReceipts(Date bd, Date kt) throws IllegalArgumentException {
-        checkDate(bd, kt);
-        return tkDAO.getStatisticReceipts(bd, kt);
+//    public ArrayList<StatisticReceipt> getStatisticReceipts(Date bd, Date kt) throws IllegalArgumentException {
+//        checkDate(bd, kt);
+//        return tkDAO.getStatisticReceipts(bd, kt);
+//    }
+
+    public ArrayList<StatisticProduct> getStatisticProducts() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

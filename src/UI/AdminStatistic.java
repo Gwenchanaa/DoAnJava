@@ -6,22 +6,26 @@ package UI;
 
 import BUS.ThongkeBUS;
 import Model.StatisticProduct;
+import UI.panel.ProductStatisticPanel;
+import UI.panel.ReceiptStatisticPanel;
 import java.net.URL;
 import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-
 
 public class AdminStatistic extends javax.swing.JFrame {
 
     private ThongkeBUS tkBUS = new ThongkeBUS();
+    ProductStatisticPanel pSP = new ProductStatisticPanel();
+    ReceiptStatisticPanel rSP = new ReceiptStatisticPanel();
 
     public AdminStatistic() {
         initComponents();
-        Chart.setVisible(false);
-        jPanel1.setVisible(false);
+//        Chart.setVisible(false);
+//        jPanel1.setVisible(false);
     }
     int MousepX, MousepY;
 
@@ -44,8 +48,9 @@ public class AdminStatistic extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        ScrollPane = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        start = new com.toedter.calendar.JDateChooser();
+        end = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -100,13 +105,12 @@ public class AdminStatistic extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addGap(224, 224, 224)
                 .addComponent(jLabel17)
-                .addGap(185, 185, 185)
+                .addGap(371, 371, 371)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(cancel)
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +132,7 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        ShowTable.setText("SHOW INCOME TABLE");
+        ShowTable.setText("Thống kê doanh thu");
         ShowTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowTableActionPerformed(evt);
@@ -174,52 +178,21 @@ public class AdminStatistic extends javax.swing.JFrame {
             .addGroup(VerticalBarLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(ReturnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1824, Short.MAX_VALUE))
+                .addContainerGap(1871, Short.MAX_VALUE))
         );
 
         jLabel2.setText("BD");
 
         jLabel3.setText("KT");
 
-        Table.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
-        Table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-            },
-            new String [] {
-                "ProductID", "Product", "Quantity", "Income"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        jButton1.setText("Thống kê kho  hàng");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        Table.setGridColor(new java.awt.Color(51, 51, 51));
-        Table.setInheritsPopupMenu(true);
-        Table.setRowHeight(50);
-        Table.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        Table.setShowGrid(true);
-        ScrollPane.setViewportView(Table);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -232,14 +205,20 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ShowTable, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ShowTable, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(end, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -250,23 +229,29 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(5, 5, 5)
                                 .addComponent(ShowTable)
                                 .addGap(12, 12, 12)
-                                .addComponent(jLabel2)
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel3))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(start, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(end, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1200, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Chart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70))))
+                        .addGap(70, 70, 70))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -280,7 +265,7 @@ public class AdminStatistic extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -310,16 +295,17 @@ public class AdminStatistic extends javax.swing.JFrame {
 
     private void ShowTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowTableActionPerformed
         try {
-            Chart.setVisible(false);
-
+            jPanel1.removeAll();
+            jPanel1.add(pSP);
+            jPanel1.validate();
+            jPanel1.repaint();
             //get start voi end
-//            Date bd =  start.getDate();
-            
-//            Date kt = end.getDate();
+            Date bd = start.getDate();
 
-//            ArrayList<StatisticProduct> list = tkBUS.getStatisticProducts(bd,kt );
-//            loadStatisticProducts(list);
-            jPanel1.setVisible(true);
+            Date kt = end.getDate();
+            ArrayList<StatisticProduct> list = tkBUS.getStatisticProducts(bd, kt);
+            pSP.loadStatisticProducts(list);
+            pSP.loadSum(list);
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
@@ -342,6 +328,30 @@ public class AdminStatistic extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cancelMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            jPanel1.removeAll();
+            jPanel1.add(rSP);
+            jPanel1.validate();
+            jPanel1.repaint();
+            ArrayList<StatisticProduct> list1;
+            list1 = tkBUS.getStatisticProducts();
+
+            rSP.loadStatisticReceipts(list1);
+            rSP.load(list1);
+            //get start voi end
+//            Date bd =  start.getDate();
+
+//            Date kt = end.getDate();
+//            ArrayList<StatisticProduct> list = tkBUS.getStatisticReceipts(bd,kt );
+//            loadStatisticReceipts(list);
+//            jPanel1.setVisible(true);
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }
@@ -360,11 +370,11 @@ public class AdminStatistic extends javax.swing.JFrame {
     private javax.swing.JPanel Chart;
     private javax.swing.JPanel HeadBar;
     private javax.swing.JLabel ReturnBtn;
-    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JButton ShowTable;
-    private javax.swing.JTable Table;
     private javax.swing.JPanel VerticalBar;
     private javax.swing.JLabel cancel;
+    private com.toedter.calendar.JDateChooser end;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -374,16 +384,7 @@ public class AdminStatistic extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private com.toedter.calendar.JDateChooser start;
     // End of variables declaration//GEN-END:variables
- public void loadStatisticProducts(ArrayList<StatisticProduct> list) {
-        DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        // Xóa tất cả các hàng trong model trước khi load dữ liệu mới
-        model.setRowCount(0);
 
-        // Thêm dữ liệu từ ArrayList vào model
-        for (StatisticProduct sp : list) {
-            Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getQuanity(), sp.getIncome()};
-            model.addRow(rowData);
-        }
-    }
 }
