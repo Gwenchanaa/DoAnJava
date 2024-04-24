@@ -314,7 +314,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__input.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelCategoryID.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        LabelCategoryID.setText("ID phiếu nhập");
+        LabelCategoryID.setText("ID hóa đơn");
         Wrapper__input.add(LabelCategoryID, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 7, 107, -1));
 
         TextReceiptID.setEditable(false);
@@ -328,7 +328,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__input.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 32, 190, -1));
 
         LabelProductID.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        LabelProductID.setText("Người tạo phiếu");
+        LabelProductID.setText("ID người tạo");
         Wrapper__input.add(LabelProductID, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 71, 106, -1));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
@@ -365,8 +365,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__input.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 225, 190, -1));
 
         CreateReceiptBtn.setBackground(new java.awt.Color(51, 153, 255));
-        CreateReceiptBtn.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        CreateReceiptBtn.setText("Tạo phôi đơn");
+        CreateReceiptBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        CreateReceiptBtn.setText("Tạo phiếu nhập");
         CreateReceiptBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CreateReceiptBtnMouseClicked(evt);
@@ -508,7 +508,7 @@ public class AdminReceipt extends javax.swing.JFrame {
 
         ImportProductBtn1.setBackground(new java.awt.Color(255, 102, 102));
         ImportProductBtn1.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
-        ImportProductBtn1.setText("Xóa mặt hàng");
+        ImportProductBtn1.setText("Xóa chi tiết");
         ImportProductBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteItem(evt);
@@ -525,7 +525,7 @@ public class AdminReceipt extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "ID sản phẩm", "Số lượng nhập", "đơn giá"
+                "STT", "Tên sản phẩm", "Số lượng nhập", "đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -587,7 +587,7 @@ public class AdminReceipt extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ReceiptID", "ReceiptCompany", "UserID", "ReceiptDate"
+                "Mã hóa đơn", "Nhà cung cấp", "Mã người tạo", "Ngày tạo đơn"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -1014,7 +1014,6 @@ public class AdminReceipt extends javax.swing.JFrame {
     }
 
     public void showDataRightTable() {
-        System.out.println("right show ");
         DefaultTableModel model = (DefaultTableModel) Table1.getModel();
         int rows = model.getRowCount();
         for (int i = rows - 1; i >= 0; i--) {

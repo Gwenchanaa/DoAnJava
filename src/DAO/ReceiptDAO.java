@@ -4,7 +4,6 @@ import DataCon.JDBC;
 import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class ReceiptDAO {
 

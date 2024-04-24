@@ -105,9 +105,9 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(label_avatar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_nameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addComponent(cancel)
-                .addGap(1, 1, 1))
+                .addGap(0, 0, 0))
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +437,7 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,13 +451,11 @@ public class AdminHome extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -578,12 +576,12 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_HeadBarMousePressed
 
     private void panel_statisticGoToAdminStatistic(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_statisticGoToAdminStatistic
-//        AdminStatistic a = new AdminStatistic();
-//        a.setVisible(true);
-//        x = this.getX();
-//        y = this.getY();
-//        a.setPositionForWin(x, y);
-//        dispose();
+        AdminStatistic a = new AdminStatistic();
+        a.setVisible(true);
+        x = this.getX();
+        y = this.getY();
+        a.setPositionForWin(x, y);
+        dispose();
     }//GEN-LAST:event_panel_statisticGoToAdminStatistic
 
     private void panel_statisticenteredStatic(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_statisticenteredStatic

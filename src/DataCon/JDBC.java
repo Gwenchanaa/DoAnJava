@@ -7,7 +7,7 @@ public class JDBC {
     public static Connection getConnection() {
         Connection conn = null;
 
-        String url = "jdbc:sqlserver://LAPTOP-634PD96R\\SQLEXPRESS:1433; databaseName=leatherManagerSystem1;user=sa;password=12345;"
+        String url = "jdbc:sqlserver://LAPTOP-VNOPB5Q7\\SQLEXPRESS:1433; databaseName=Hello;user=sa;password=123;"
                 + "encrypt=true;trustServerCertificate=true";
         if (conn == null) {
             try {
@@ -21,18 +21,16 @@ public class JDBC {
         }
         return conn;
     }
-       
 
     public static void closeConnection(Connection c) {
-        try{
-            if(c != null){
+        try {
+            if (c != null) {
                 c.close();
                 System.out.println("Connection is closed !!!");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 }
-

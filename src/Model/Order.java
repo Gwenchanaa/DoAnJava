@@ -1,66 +1,52 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package model;
+package Model;
 
-/**
- *
- * @author CUONG
- */
-/*INSERT INTO [dbo].[Orders]
-           ([OrderID]
-           ,[UserID]
-           ,[CustomerID]
-           ,[OrderDate])
-     VALUES
-           (<OrderID, nvarchar(7),>
-           ,<UserID, nvarchar(7),>
-           ,<CustomerID, nvarchar(7),>
-           ,<OrderDate, date,>)*/
+
 public class Order {
-           String orderid,userid,customerid,orderdate;
+    
+        String OrderID,UserID,CustomerID,OrderDate;
 
-    public Order() {
+    public Order(String OrderID, String UserID, String CustomerID, String OrderDate) {
+        this.OrderID = OrderID;
+        this.UserID = UserID;
+        this.CustomerID = CustomerID;
+        this.OrderDate = OrderDate;
     }
 
-    public Order(String orderid, String userid, String customerid, String orderdate) {
-        this.orderid = orderid;
-        this.userid = userid;
-        this.customerid = customerid;
-        this.orderdate = orderdate;
+    public String getOrderID() {
+        return OrderID;
     }
 
-    public String getOrderid() {
-        return orderid;
+    public void setOrderID(String OrderID) {
+        this.OrderID = OrderID;
     }
 
-    public void setOrderid(String orderid) {
-        this.orderid = orderid;
+    public String getUserID() {
+        return UserID;
     }
 
-    public String getUserid() {
-        return userid;
+    public void setUserID(String UserID) {
+        this.UserID = UserID;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public String getCustomerID() {
+        return CustomerID;
     }
 
-    public String getCustomerid() {
-        return customerid;
+    public void setCustomerID(String CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
-    public void setCustomerid(String customerid) {
-        this.customerid = customerid;
+    public String getOrderDate() {
+        return OrderDate;
     }
 
-    public String getOrderdate() {
-        return orderdate;
+    public void setOrderDate(String OrderDate) {
+        this.OrderDate = OrderDate;
     }
 
-    public void setOrderdate(String orderdate) {
-        this.orderdate = orderdate;
+    @Override
+    public String toString() {
+        return "Order{" + "OrderID=" + OrderID + ", UserID=" + UserID + ", CustomerID=" + CustomerID + ", OrderDate=" + OrderDate + '}';
     }
-           
+        
 }

@@ -2,11 +2,9 @@ package DAO;
 
 import DataCon.JDBC;
 import Model.Product;
-import UI.AdminProduct;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 public class ProductDAO {
 
@@ -58,7 +56,7 @@ public class ProductDAO {
             System.out.println(kq + " thay đổi");
             JDBC.closeConnection(c);
             if (kq == 0) {
-                JOptionPane.showMessageDialog(null, "Không tồn tại "+t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Sửa thành công " + t.getProductID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -148,44 +146,67 @@ public class ProductDAO {
         return list;
     }
 
-//    public ArrayList<Product> searchFunction(String idS, String nameS, double priceS, int key, int keyProperty) {
-//        ArrayList<Product> list = new ArrayList<>();
-//
-//        try {
-//            Connection c = JDBC.getConnection();
-//            Statement st = c.createStatement();
-//            String sql = "select * from Products ";
-//            if( key == 3){
-//                sql = sql + "where ProductID = '" + idS +"' and ProductName like '%" + nameS +"%' and ProductPrice = " + priceS;
-//            }
-//            
-//            if ( key == 1 && keyProperty == 1){
-//                sql = sql + "where ProductID = '" + idS +"' ";
-//            } 
-//            if ( key == 1 && keyProperty == 2){
-//                sql = sql + "where ProductName like '%" + nameS +"%' ";
-//            } 
-//            if ( key == 1 && keyProperty == 3){
-//                sql = sql + "where ProductPrice = " + priceS;
-//            } 
-//            ResultSet rs = st.executeQuery(sql);
-//            System.out.println(sql);
-//            while (rs.next()) {
-//                String id = rs.getString("ProductID");
-//                String name = rs.getString("ProductName");
-//                double price = rs.getDouble("ProductPrice");
-//                int quantity = rs.getInt("ProductQuantity");
-//                String path = rs.getString("ProductImage");
-//                Product p = new Product(id,name,price,quantity,path);
-//                list.add(p);
-//            }
-//            
-//            JDBC.closeConnection(c);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return list;
-//    }
+    public String getImagePath(String ProductID) {
+        String path = "";
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "select ProductImage "
+                    + "from Products "
+                    + "where ProductID = '" + ProductID + "'";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                path = rs.getString("ProductImage");
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("ProductDAO getImagePath");
+        }
+        return path;
+    }
+
+    public String createProductID() {
+        String id = "";
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "SELECT COUNT(*) AS id\n"
+                    + "FROM Products";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                id = rs.getString("id");
+            }
+            int intId = Integer.parseInt(id);
+            intId = intId + 1;
+            
+            id = "pro" + String.valueOf(intId);
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("ProductDAO createProductID");
+        }
+        return id;
+    }
+
+    public ArrayList<String> getCategories() {
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "SELECT CategoryID "
+                    + "FROM Categories";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String cate = rs.getString("CategoryID");
+                list.add(cate);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("ProductDAO getCategories");
+        }
+        return list;
+    }
+    
 }
