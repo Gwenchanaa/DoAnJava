@@ -56,7 +56,7 @@ public class CategoryDAO {
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 String a = rs.getString("CategoryID");
-                a = a.substring(4);
+               a = a.trim();
                 int num = Integer.valueOf(a);
                 num++;
                 i = "Cate" + num;
