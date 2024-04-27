@@ -29,7 +29,9 @@ public class ThongkeBUS {
 //        return tkDAO.getStatisticReceipts(bd, kt);
 //    }
 
-    public ArrayList<StatisticProduct> getStatisticProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+
+    public ArrayList<StatisticProduct> getStatisticReceipts() {
+        return tkDAO.getStatisticReceipts();
     }
 }

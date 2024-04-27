@@ -314,7 +314,7 @@ public class AdminStatistic extends javax.swing.JFrame {
             jPanel1.validate();
             jPanel1.repaint();
             ArrayList<StatisticProduct> list1;
-            list1 = tkBUS.getStatisticProducts();
+            list1 = tkBUS.getStatisticReceipts();
 
             rSP.loadStatisticReceipts(list1);
             rSP.load(list1);
