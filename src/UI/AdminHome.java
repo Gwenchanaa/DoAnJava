@@ -1,8 +1,11 @@
 package UI;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class AdminHome extends javax.swing.JFrame {
+
+    private String ID;
 
     public AdminHome() {
         initComponents();
@@ -16,7 +19,6 @@ public class AdminHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         HeadBar = new javax.swing.JPanel();
-        label_nameAdmin = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
         label_avatar = new javax.swing.JLabel();
         label_brand = new javax.swing.JLabel();
@@ -66,9 +68,6 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
 
-        label_nameAdmin.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        label_nameAdmin.setText("ADMIN1");
-
         cancel.setBackground(new java.awt.Color(255, 102, 51));
         cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Close.png"))); // NOI18N
         cancel.setOpaque(true);
@@ -79,6 +78,11 @@ public class AdminHome extends javax.swing.JFrame {
         });
 
         label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignOut(evt);
+            }
+        });
 
         label_brand.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         label_brand.setText(" HANDCRAFTED LEATHER");
@@ -99,32 +103,30 @@ public class AdminHome extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(label_lotus)))
-                .addGap(209, 209, 209)
+                .addGap(299, 299, 299)
                 .addComponent(label_title)
-                .addGap(162, 162, 162)
-                .addComponent(label_avatar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label_nameAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
                 .addComponent(cancel)
                 .addGap(0, 0, 0))
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeadBarLayout.createSequentialGroup()
-                .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(label_nameAdmin)
-                        .addComponent(label_avatar)
-                        .addComponent(cancel))
-                    .addComponent(label_title))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeadBarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(label_lotus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label_brand)
                 .addGap(33, 33, 33))
+            .addGroup(HeadBarLayout.createSequentialGroup()
+                .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancel)
+                    .addGroup(HeadBarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(label_title))
+                    .addComponent(label_avatar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         content.setBackground(new java.awt.Color(234, 252, 252));
@@ -442,9 +444,9 @@ public class AdminHome extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -465,6 +467,10 @@ public class AdminHome extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cancelMouseClicked
 
+    public void setUser(String id) {
+        label_avatar.setText(id);
+    }
+
     private void goToProductFrame(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToProductFrame
         AdminProduct a = new AdminProduct();
         a.setVisible(true);
@@ -472,6 +478,8 @@ public class AdminHome extends javax.swing.JFrame {
         y = this.getY();
         a.setPositionForWin(x, y);
         a.showData();
+        ID = label_avatar.getText();
+        a.setUser(ID);
         dispose();
     }//GEN-LAST:event_goToProductFrame
 
@@ -481,6 +489,8 @@ public class AdminHome extends javax.swing.JFrame {
         x = this.getX();
         y = this.getY();
         a.setPositionForWin(x, y);
+        ID = label_avatar.getText();
+        a.setUser(ID);
         dispose();
     }//GEN-LAST:event_panel_categoryMouseClicked
 
@@ -490,6 +500,8 @@ public class AdminHome extends javax.swing.JFrame {
         x = this.getX();
         y = this.getY();
         a.setPositionForWin(x, y);
+        ID = label_avatar.getText();
+        a.setUser(ID);
         dispose();
     }//GEN-LAST:event_goToOrder
 
@@ -498,6 +510,8 @@ public class AdminHome extends javax.swing.JFrame {
         a.setVisible(true);
         x = this.getX();
         y = this.getY();
+        ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x, y);
         dispose();
     }//GEN-LAST:event_goToCustomer
@@ -507,6 +521,8 @@ public class AdminHome extends javax.swing.JFrame {
         a.setVisible(true);
         x = this.getX();
         y = this.getY();
+        ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x, y);
         dispose();
     }//GEN-LAST:event_goToUser
@@ -580,6 +596,8 @@ public class AdminHome extends javax.swing.JFrame {
         a.setVisible(true);
         x = this.getX();
         y = this.getY();
+        ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x, y);
         dispose();
     }//GEN-LAST:event_panel_statisticGoToAdminStatistic
@@ -597,9 +615,23 @@ public class AdminHome extends javax.swing.JFrame {
         a.setVisible(true);
         x = this.getX();
         y = this.getY();
+        ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x, y);
         dispose();
     }//GEN-LAST:event_GoToReceipt
+
+    private void SignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_SignOut
 
     /**
      * @param args the command line arguments
@@ -634,7 +666,6 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel label_avatar;
     private javax.swing.JLabel label_brand;
     private javax.swing.JLabel label_lotus;
-    private javax.swing.JLabel label_nameAdmin;
     private javax.swing.JLabel label_title;
     private javax.swing.JPanel panel_category;
     private javax.swing.JPanel panel_customer;

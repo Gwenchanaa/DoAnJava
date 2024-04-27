@@ -20,9 +20,9 @@ public class ReceiptDetailDAO {
             String sql = "insert into ReceiptDetails(ReceiptID, ProductID, ReceiptQuantity, ReceiptPrice) "
                     + "values('" + t.getReceiptID() + "', '" + t.getProductID() + "', '" + t.getReceiptQuantity()
                     + "', '" + t.getReceiptPrice() + "') ";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             JDBC.closeConnection(c);
             i = 0;
         } catch (SQLException ex) {
@@ -37,11 +37,32 @@ public class ReceiptDetailDAO {
             Statement st = c.createStatement();
             String sql = "delete  from ReceiptDetails "
                     + "where ProductID = '" + ReceiptID + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             if (kq != 0) {
                 JOptionPane.showMessageDialog(null, "Xóa thành công ", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int updateTable1(String ReceiptID, String num) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update ReceiptDetails "
+                    + "set ReceiptQuantity =" + num
+                    + " where ProductID = '" + ReceiptID + "'";
+//            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+//            System.out.println(sql);
+//            System.out.println(kq + " thay doi");
+            if (kq != 0) {
+                JOptionPane.showMessageDialog(null, "Sửa thành công ", "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
@@ -54,13 +75,14 @@ public class ReceiptDetailDAO {
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
-            String sql = "delete  from ReceiptDetails "
+            String sql = "update  ReceiptDetails "
+                    + "set ReceiptQuantity = 0"
                     + "where ReceiptID = '" + ReceiptID + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             if (kq != 0) {
-                JOptionPane.showMessageDialog(null, "Xóa thành công ", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+//                JOptionPane.showMessageDialog(null, "Xóa thành công ", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
@@ -94,7 +116,7 @@ public class ReceiptDetailDAO {
         }
         return list;
     }
-
+    
     public int UpdateProduct(String s) {
         try {
             Connection c = JDBC.getConnection();
@@ -153,10 +175,10 @@ public class ReceiptDetailDAO {
                     + "ON Receipts.ReceiptID = ReceiptDetails.ReceiptID)\n"
                     + "join Products\n"
                     + "on ReceiptDetails.ProductID = Products.ProductID \n"
-                    + "where Receipts.ReceiptID = '" + ReceiptID +"'";
-            System.out.println(sql);
+                    + "where Receipts.ReceiptID = '" + ReceiptID + "'";
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             if (kq != 0) {
                 JOptionPane.showMessageDialog(null, "Hoàn hàng", "CANCEL SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }

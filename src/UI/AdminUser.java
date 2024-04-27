@@ -6,8 +6,7 @@ import java.awt.Font;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.User;
@@ -22,11 +21,16 @@ public class AdminUser extends javax.swing.JFrame {
         Table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         Table.getTableHeader().setOpaque(false);
         Table.getTableHeader().setBackground(new Color(32, 136, 203));
-        createUserID();
         showData();
+        checkBoxUser.setSelected(true);
+        createUserID();
     }
 
     int MousepX, MousepY;
+    private int x, y;
+    public void setUser(String id) {
+        label_avatar.setText(id);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,12 +40,11 @@ public class AdminUser extends javax.swing.JFrame {
         VerticalBar = new javax.swing.JPanel();
         ReturnBtn = new javax.swing.JLabel();
         HeadBar = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         TextUserID = new javax.swing.JTextField();
@@ -60,6 +63,9 @@ public class AdminUser extends javax.swing.JFrame {
         AddButton = new javax.swing.JLabel();
         SearchBtn = new javax.swing.JButton();
         ResetBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        checkBoxAdmin = new javax.swing.JCheckBox();
+        checkBoxUser = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -110,11 +116,6 @@ public class AdminUser extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel4.setText("ADMIN1");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -132,6 +133,13 @@ public class AdminUser extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout HeadBarLayout = new javax.swing.GroupLayout(HeadBar);
         HeadBar.setLayout(HeadBarLayout);
         HeadBarLayout.setHorizontalGroup(
@@ -143,13 +151,11 @@ public class AdminUser extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(172, 172, 172)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
+                .addGap(283, 283, 283)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
                 .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
@@ -164,13 +170,9 @@ public class AdminUser extends javax.swing.JFrame {
                 .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancel)
                     .addGroup(HeadBarLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)))
-                    .addGroup(HeadBarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel17)))
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -367,6 +369,47 @@ public class AdminUser extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(234, 252, 252));
+
+        checkBoxAdmin.setBackground(new java.awt.Color(234, 252, 252));
+        checkBoxAdmin.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
+        checkBoxAdmin.setText("admin");
+        checkBoxAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxAdminActionPerformed(evt);
+            }
+        });
+
+        checkBoxUser.setBackground(new java.awt.Color(234, 252, 252));
+        checkBoxUser.setFont(new java.awt.Font("Serif", 3, 14)); // NOI18N
+        checkBoxUser.setText("user");
+        checkBoxUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkBoxUser, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkBoxAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(checkBoxUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(checkBoxAdmin)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -381,7 +424,9 @@ public class AdminUser extends javax.swing.JFrame {
                             .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
@@ -397,22 +442,26 @@ public class AdminUser extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
 
@@ -438,6 +487,8 @@ public class AdminUser extends javax.swing.JFrame {
         AdminHome a = new AdminHome();
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_home
@@ -529,7 +580,13 @@ public class AdminUser extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButtonMouseClicked
 
     public void createUserID() {
-        String id = UserDAO.getInstance().createUserID();
+        String a = "";
+        if (checkBoxUser.isSelected()) {
+            a = "user";
+        } else {
+            a = "admin";
+        }
+        String id = UserDAO.getInstance().createUserID(a);
         TextUserID.setText(id);
     }
 
@@ -571,7 +628,7 @@ public class AdminUser extends javax.swing.JFrame {
         TextUserID.setText(model.getValueAt(count, 0).toString());
         TextUserName.setText(model.getValueAt(count, 1).toString());
         TextUserPassword.setText("************");
-        TextUserPassword.setBackground(new Color(246,241,241, 255));
+        TextUserPassword.setBackground(new Color(246, 241, 241, 255));
         TextUserPassword.setEditable(false);
         TextUserPassword.setFocusable(false);
     }//GEN-LAST:event_TableMouseClicked
@@ -593,19 +650,52 @@ public class AdminUser extends javax.swing.JFrame {
             User cate = list.get(i);
             model.addRow(new Object[]{cate.getUserID(), cate.getUserName()});
         }
-        TextUserPassword.setText("******");
-        TextUserPassword.setBackground(Color.GRAY);
-        TextUserPassword.setEditable(true);
+        TextUserPassword.setText("************");
+        TextUserPassword.setBackground(new Color(246, 241, 241, 255));
+        TextUserPassword.setEditable(false);
     }//GEN-LAST:event_SearchBtnSearchButtonClicked
+
+    private void checkBox() {
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(checkBoxAdmin);
+        buttonGroup.add(checkBoxUser);
+//        System.out.println(checkBoxAdmin.isSelected());
+//        System.out.println(checkBoxUser.isSelected());
+    }
 
     private void ResetBtnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetBtnClicked
         showData();
         createUserID();
         TextUserName.setText("");
         TextUserPassword.setText("");
-        TextUserPassword.setBackground(Color.white);
         TextUserPassword.setEditable(true);
+        TextUserPassword.setBackground(Color.white);
+        TextUserPassword.setFocusable(true);
+        checkBoxUser.setSelected(true);
+        checkBoxAdmin.setSelected(false);
     }//GEN-LAST:event_ResetBtnClicked
+
+    private void checkBoxUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxUserActionPerformed
+        checkBox();
+        createUserID();
+    }//GEN-LAST:event_checkBoxUserActionPerformed
+
+    private void checkBoxAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxAdminActionPerformed
+        checkBox();
+        createUserID();
+    }//GEN-LAST:event_checkBoxAdminActionPerformed
+
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
 
     public void showData() {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
@@ -649,14 +739,15 @@ public class AdminUser extends javax.swing.JFrame {
     private javax.swing.JLabel UpdateButton;
     private javax.swing.JPanel VerticalBar;
     private javax.swing.JLabel cancel;
+    private javax.swing.JCheckBox checkBoxAdmin;
+    private javax.swing.JCheckBox checkBoxUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -664,5 +755,6 @@ public class AdminUser extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel label_avatar;
     // End of variables declaration//GEN-END:variables
 }

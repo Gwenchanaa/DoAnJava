@@ -45,24 +45,29 @@ public class UserDAO {
         return i;
     }
 
-    public String createUserID() {
+    public String createUserID(String id) {
         String i = "";
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
             String sql = "select top 1 UserID\n"
                     + "from Users\n"
+                    + "where UserID like '" + id + "%'\n"
                     + "Order by UserID desc";
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 String a = rs.getString("UserID");
-                a = a.substring(4);
+                if ("u".equals(a.substring(0,1))) {
+                    a = a.substring(4);
+                } else {
+                    a = a.substring(5);
+                }
                 int num = Integer.valueOf(a);
                 num++;
-                i = "User" + num;
+                i = id + num;
             }
             if (i.equals("")) {
-                i = "User0";
+                i = id + "0";
             }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
@@ -99,7 +104,7 @@ public class UserDAO {
         try {
             PreparedStatement st = c.prepareStatement(sql);
             int kq = st.executeUpdate();
-            System.out.println(kq);
+//            System.out.println(kq);
             if (kq != 0) {
                 JOptionPane.showMessageDialog(null, "Xóa thành công " + user.getUserID(), "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }

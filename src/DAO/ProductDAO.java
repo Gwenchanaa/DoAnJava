@@ -16,13 +16,18 @@ public class ProductDAO {
         int i = 0; // để xác định lỗi của text nào và set LabelThongBao về rỗng
         try {
             Connection c = JDBC.getConnection();
-            Statement st = c.createStatement();
             String sql = "insert into Products(CategoryID, ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage) "
-                    + "values('" + t.getCategoryID() + "', '" + t.getProductID() + "', '" + t.getProductName()
-                    + "', '" + t.getProductQuantity() + "', '" + t.getPrice() + "', '" + t.getProductImage() + "') ";
-            System.out.println(sql);
-            int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+                    + "values(?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, t.getCategoryID());
+            ps.setString(2, t.getProductID());
+            ps.setString(3, t.getProductName());
+            ps.setInt(4, t.getProductQuantity());
+            ps.setDouble(5, t.getPrice());
+            ps.setString(6, t.getProductImage());
+
+            int kq = ps.executeUpdate();
             JDBC.closeConnection(c);
             i = 0;
         } catch (SQLException ex) {
@@ -32,7 +37,7 @@ public class ProductDAO {
             if (errorMessage.contains("FOREIGN KEY constraint")) {
                 i = 1;
             } else if (errorMessage.contains("PRIMARY KEY constraint")) {
-                System.out.println("pro");
+//                System.out.println("pro");
                 i = 2;
             }
         }
@@ -42,18 +47,24 @@ public class ProductDAO {
     public int update(Product t) {
         try {
             Connection c = JDBC.getConnection();
-            Statement st = c.createStatement();
             String sql = "update Products "
                     + "set "
-                    + "CategoryID = '" + t.getCategoryID() + "', "
-                    + "ProductName = '" + t.getProductName() + "', "
-                    + "ProductQuantity = '" + t.getProductQuantity() + "', "
-                    + "ProductPrice = '" + t.getPrice() + "', "
-                    + "ProductImage = '" + t.getProductImage() + "' "
-                    + "where ProductID = '" + t.getProductID() + "'";
-            System.out.println(sql);
-            int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay đổi");
+                    + "CategoryID = ?, "
+                    + "ProductName = ?, "
+                    + "ProductQuantity = ?, "
+                    + "ProductPrice = ?, "
+                    + "ProductImage = ? "
+                    + "where ProductID = ?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, t.getCategoryID());
+            ps.setString(2, t.getProductName());
+            ps.setInt(3, t.getProductQuantity());
+            ps.setDouble(4, t.getPrice());
+            ps.setString(5, t.getProductImage());
+            ps.setString(6, t.getProductID());
+
+            int kq = ps.executeUpdate();
             JDBC.closeConnection(c);
             if (kq == 0) {
                 JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
@@ -72,9 +83,9 @@ public class ProductDAO {
             Statement st = c.createStatement();
             String sql = "delete  from Products "
                     + "where ProductID = '" + t.getProductID() + "' and CategoryID = '" + t.getCategoryID() + "' ";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             if (kq != 0) {
                 JOptionPane.showMessageDialog(null, "Xóa thành công " + t.getProductID(), "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -91,13 +102,10 @@ public class ProductDAO {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
             String sql = "select *  from Products "
-                    + "where CategoryID like '%" + list.get(0) + "' and ProductID like '%" + list.get(1) + "' and ProductName like '%"
-                    + list.get(2) + "'"
-                    + " and ProductImage like '" + list.get(5) + "' "
-                    + "or CategoryID like '%" + list.get(0) + "%' and ProductID like '%" + list.get(1) + "%' and ProductName like '%"
-                    + list.get(2) + "%'"
-                    + " and ProductImage like '%" + list.get(5) + "'";
-            System.out.println(sql);
+                    + "where CategoryID like '%" + list.get(0) + "%' and ProductID like '%" + list.get(1) + "%' and ProductName like '%"
+                    + list.get(2) + "%' and ProductQuantity like '%" + list.get(3) + "%' and ProductPrice like '%" + list.get(4) + "%'";
+
+//            System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -179,7 +187,7 @@ public class ProductDAO {
             }
             int intId = Integer.parseInt(id);
             intId = intId + 1;
-            
+
             id = "pro" + String.valueOf(intId);
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
@@ -201,6 +209,7 @@ public class ProductDAO {
                 String cate = rs.getString("CategoryID");
                 list.add(cate);
             }
+            list.add("");
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -208,5 +217,24 @@ public class ProductDAO {
         }
         return list;
     }
-    
+
+    public String getNameProductFromID(String id) {
+        String name = "";
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "SELECT ProductName "
+                    + "FROM Products "
+                    + "where ProductID = '" + id + "'";
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                name = rs.getString("ProductName");
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("ProductDAO getNameProductFromID");
+        }
+        return name;
+    }
 }

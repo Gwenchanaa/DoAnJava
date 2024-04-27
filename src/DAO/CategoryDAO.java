@@ -27,9 +27,12 @@ public class CategoryDAO {
             st.setString(1, cate.getCategoryID());
             st.setString(2, cate.getCategoryName());
 
-            st.executeUpdate();
+            int kq = st.executeUpdate();
             i = 0;
-
+            if (kq != 0) {
+                i = 0;
+                JOptionPane.showMessageDialog(null, "Thêm thành công " + cate.getCategoryName(), "ADD SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             String errorMessage = ex.getMessage();
@@ -38,7 +41,7 @@ public class CategoryDAO {
                 i = 1;
             } else if (errorMessage.contains("PRIMARY KEY constraint")) {
                 i = 2;
-                System.out.println(i);
+//                System.out.println(i);
                 System.out.println(errorMessage);
             }
         }
@@ -59,10 +62,10 @@ public class CategoryDAO {
                 a = a.substring(4);
                 int num = Integer.valueOf(a);
                 num++;
-                i = "Cate" + num;
+                i = "cate" + num;
             }
             if (i.equals("")) {
-                i = "Cate0";
+                i = "cate0";
             }
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
@@ -92,21 +95,26 @@ public class CategoryDAO {
         return list;
     }
 
-    public void delete(Category cate) {
+    public int delete(Category cate) {
         Connection c = JDBC.getConnection();
+        int i = 0;
         String sql = "DELETE FROM [dbo].[Categories]\n"
                 + "      WHERE CategoryID= '" + cate.getCategoryID() + "'";
         try {
             PreparedStatement st = c.prepareStatement(sql);
             int kq = st.executeUpdate();
-            System.out.println(kq);
+//            System.out.println(kq);
             if (kq != 0) {
-                JOptionPane.showMessageDialog(null, "Xóa thành công " + cate.getCategoryID(), "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                i = 0;
+                JOptionPane.showMessageDialog(null, "Xóa thành công " + cate.getCategoryName(), "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
             JDBC.closeConnection(c);
         } catch (SQLException e) {
-            System.out.println(e);;
+            System.out.println(e);
+            i = 1;
+            JOptionPane.showMessageDialog(null, "Xóa không thành công. Tồn tại sản phẩm thuộc loại \" " + cate.getCategoryName()+" \"", "DELETE FAIL", JOptionPane.INFORMATION_MESSAGE);
         }
+        return i;
     }
 
     public void update(Category ca) {
@@ -118,22 +126,23 @@ public class CategoryDAO {
             PreparedStatement st = c.prepareStatement(sql);
 
             st.setString(1, ca.getCategoryName());
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate();
             JDBC.closeConnection(c);
             if (kq == 0) {
                 JOptionPane.showMessageDialog(null, "Không tồn tại " + ca.getCategoryID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Sửa thành công " + ca.getCategoryID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Sửa thành công " + ca.getCategoryName(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
+            System.out.println("CategoryDAO update");
             e.printStackTrace();
         }
     }
-    
+
     public ArrayList<Category> findCategory(Category cate) {
         ArrayList<Category> list = new ArrayList<>();
-        String sql = "select * from categories where categories.CategoryName like'%" + cate.getCategoryName()+ "%'";
+        String sql = "select * from categories where categories.CategoryName like'%" + cate.getCategoryName() + "%'";
         try {
             Connection c = JDBC.getConnection();
             PreparedStatement st = c.prepareStatement(sql);

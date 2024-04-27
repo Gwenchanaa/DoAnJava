@@ -1,17 +1,14 @@
 package UI;
 
 import DAO.CategoryDAO;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import model.Category;
+import model.*;
 
 public class AdminCategory extends javax.swing.JFrame {
 
@@ -26,7 +23,7 @@ public class AdminCategory extends javax.swing.JFrame {
         createCategoryID();
         showData();
     }
-
+    private int x, y;
     int MousepX, MousepY;
 
     @SuppressWarnings("unchecked")
@@ -37,12 +34,11 @@ public class AdminCategory extends javax.swing.JFrame {
         VerticalBar = new javax.swing.JPanel();
         ReturnBtn = new javax.swing.JLabel();
         HeadBar = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         TextCategoryID = new javax.swing.JTextField();
@@ -109,11 +105,6 @@ public class AdminCategory extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel4.setText("ADMIN1");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -131,6 +122,13 @@ public class AdminCategory extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout HeadBarLayout = new javax.swing.GroupLayout(HeadBar);
         HeadBar.setLayout(HeadBarLayout);
         HeadBarLayout.setHorizontalGroup(
@@ -142,18 +140,16 @@ public class AdminCategory extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 332, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(149, 149, 149)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
+                .addGap(276, 276, 276)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
                 .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
             HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeadBarLayout.createSequentialGroup()
+            .addGroup(HeadBarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -163,12 +159,9 @@ public class AdminCategory extends javax.swing.JFrame {
                 .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancel)
                     .addGroup(HeadBarLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel4)))))
+                        .addContainerGap()
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -176,7 +169,7 @@ public class AdminCategory extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel9.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
-        jLabel9.setText("ID loại");
+        jLabel9.setText("Mã loại");
 
         TextCategoryID.setBackground(new java.awt.Color(246, 241, 241));
         TextCategoryID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
@@ -251,7 +244,6 @@ public class AdminCategory extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        Table.setColumnSelectionAllowed(false);
         Table.setFillsViewportHeight(true);
         Table.setFocusable(false);
         Table.setGridColor(new java.awt.Color(51, 51, 51));
@@ -385,9 +377,7 @@ public class AdminCategory extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -407,7 +397,7 @@ public class AdminCategory extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addContainerGap())))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -430,6 +420,8 @@ public class AdminCategory extends javax.swing.JFrame {
 
     private void home(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home
         AdminHome a = new AdminHome();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
         a.setPositionForWin(x1, y1);
@@ -496,6 +488,10 @@ public class AdminCategory extends javax.swing.JFrame {
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnExited
 
+    public void setUser(String id){
+        label_avatar.setText(id);
+    }
+    
     private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
         boolean check = false;
         if (TextCategoryID.getText().isEmpty()) {
@@ -550,7 +546,7 @@ public class AdminCategory extends javax.swing.JFrame {
         String CategoryID = TextCategoryID.getText();
         String CategoryName = TextCategoryName.getText();
         Category c = new Category(CategoryID, CategoryName);
-        CategoryDAO.getInstance().delete(c);
+        int i = CategoryDAO.getInstance().delete(c);
         showData();
         TextCategoryName.setText("");
     }//GEN-LAST:event_MinusButtonMouseClicked
@@ -587,6 +583,18 @@ public class AdminCategory extends javax.swing.JFrame {
         TextCategoryName.setText("");
     }//GEN-LAST:event_ResetBtnClicked
 
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
     public void showData() {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         // làm sạch bảng 
@@ -601,6 +609,8 @@ public class AdminCategory extends javax.swing.JFrame {
             model.addRow(new Object[]{c.getCategoryID(), c.getCategoryName()});
         }
     }
+    
+    
 
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
@@ -632,8 +642,6 @@ public class AdminCategory extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
@@ -642,5 +650,6 @@ public class AdminCategory extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel label_avatar;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,8 +2,6 @@ package UI;
 
 import DAO.*;
 import Model.*;
-import java.awt.*;
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -20,13 +18,12 @@ public class AdminReceipt extends javax.swing.JFrame {
         PhieuNhapPanel.setVisible(false);
         showDataLeftTable();
         showDataRightTable();
-        showGreyText();
+//        showGreyText();
         showDataReceipt();
-//        PhieuNhapPanel.setComponentZOrder(Wrapper__JScrollPane, 0);
     }
 
     int MousexP, MouseyP;
-
+    private int x, y;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,12 +43,11 @@ public class AdminReceipt extends javax.swing.JFrame {
         TextMoney = new javax.swing.JTextField();
         TextDate = new javax.swing.JTextField();
         Wrapper__HeadBar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar = new javax.swing.JLabel();
         Wrapper__input = new javax.swing.JPanel();
         LabelCategoryID = new javax.swing.JLabel();
         TextReceiptID = new javax.swing.JTextField();
@@ -79,6 +75,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         LabelCategoryID3 = new javax.swing.JLabel();
         TextTotalPrice = new javax.swing.JTextField();
         ImportProductBtn1 = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
         Wrapper__JScroll__ProductImport = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
@@ -100,6 +97,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         LabelProductName1 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         TextReceiptDate2 = new javax.swing.JTextField();
+        PhieuNhapDaXoa = new javax.swing.JButton();
+        PhieuNhapDaLap = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -245,11 +244,6 @@ public class AdminReceipt extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel2.setText("ADMIN1");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -267,6 +261,13 @@ public class AdminReceipt extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout Wrapper__HeadBarLayout = new javax.swing.GroupLayout(Wrapper__HeadBar);
         Wrapper__HeadBar.setLayout(Wrapper__HeadBarLayout);
         Wrapper__HeadBarLayout.setHorizontalGroup(
@@ -278,13 +279,11 @@ public class AdminReceipt extends javax.swing.JFrame {
                     .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 365, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 349, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(332, 332, 332)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(297, 297, 297)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
                 .addComponent(cancel)
                 .addGap(0, 0, 0))
         );
@@ -298,13 +297,11 @@ public class AdminReceipt extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                 .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addComponent(cancel)
-                        .addComponent(jLabel4))
+                    .addComponent(cancel)
                     .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel17)))
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -372,9 +369,9 @@ public class AdminReceipt extends javax.swing.JFrame {
                 CreateReceiptBtnMouseClicked(evt);
             }
         });
-        Wrapper__input.add(CreateReceiptBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 274, -1, -1));
+        Wrapper__input.add(CreateReceiptBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, 30));
 
-        Wrapper.add(Wrapper__input, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 400, 300));
+        Wrapper.add(Wrapper__input, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 400, 330));
 
         Table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Table.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -446,7 +443,7 @@ public class AdminReceipt extends javax.swing.JFrame {
                 NhapHangClicked(evt);
             }
         });
-        Wrapper__Buttons.add(ImportProductBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 150, 30));
+        Wrapper__Buttons.add(ImportProductBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 150, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -514,9 +511,19 @@ public class AdminReceipt extends javax.swing.JFrame {
                 deleteItem(evt);
             }
         });
-        Wrapper__Buttons.add(ImportProductBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 180, 30));
+        Wrapper__Buttons.add(ImportProductBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 110, 30));
 
-        Wrapper.add(Wrapper__Buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 560, 310));
+        updateBtn.setBackground(new java.awt.Color(6, 214, 160));
+        updateBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        updateBtn.setText("Sửa chi tiết");
+        updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateItem(evt);
+            }
+        });
+        Wrapper__Buttons.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 110, -1));
+
+        Wrapper.add(Wrapper__Buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 580, 320));
 
         Table1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Table1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -525,11 +532,11 @@ public class AdminReceipt extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Số lượng nhập", "đơn giá"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng nhập", "Đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -546,9 +553,15 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__JScroll__ProductImport.setViewportView(Table1);
         if (Table1.getColumnModel().getColumnCount() > 0) {
             Table1.getColumnModel().getColumn(0).setResizable(false);
-            Table1.getColumnModel().getColumn(0).setPreferredWidth(15);
+            Table1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(1).setResizable(false);
             Table1.getColumnModel().getColumn(1).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(2).setResizable(false);
+            Table1.getColumnModel().getColumn(2).setPreferredWidth(15);
+            Table1.getColumnModel().getColumn(3).setResizable(false);
             Table1.getColumnModel().getColumn(3).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(4).setResizable(false);
+            Table1.getColumnModel().getColumn(4).setPreferredWidth(0);
         }
 
         Wrapper.add(Wrapper__JScroll__ProductImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 550, 340));
@@ -654,13 +667,13 @@ public class AdminReceipt extends javax.swing.JFrame {
 
         SearchBtn.setBackground(new java.awt.Color(6, 214, 160));
         SearchBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
-        SearchBtn.setText("xem chi tiết phiếu");
+        SearchBtn.setText("Xem chi tiết phiếu");
         SearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ViewReceiptDetailsClicked(evt);
             }
         });
-        Wrapper__Buttons1.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 132, 150, 30));
+        Wrapper__Buttons1.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 150, 30));
 
         Wrapper__input1.setBackground(new java.awt.Color(255, 255, 255));
         Wrapper__input1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -701,6 +714,26 @@ public class AdminReceipt extends javax.swing.JFrame {
 
         Wrapper__Buttons1.add(Wrapper__input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 210));
 
+        PhieuNhapDaXoa.setBackground(new java.awt.Color(255, 102, 102));
+        PhieuNhapDaXoa.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        PhieuNhapDaXoa.setText("Phiếu nhập đã hủy");
+        PhieuNhapDaXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletedReceipt(evt);
+            }
+        });
+        Wrapper__Buttons1.add(PhieuNhapDaXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 150, 30));
+
+        PhieuNhapDaLap.setBackground(new java.awt.Color(6, 214, 160));
+        PhieuNhapDaLap.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        PhieuNhapDaLap.setText("Phiếu nhập đã lập");
+        PhieuNhapDaLap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PhieuNhapDaLapdeletedReceipt(evt);
+            }
+        });
+        Wrapper__Buttons1.add(PhieuNhapDaLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 150, 30));
+
         Wrapper.add(Wrapper__Buttons1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 550, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -739,6 +772,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         AdminHome a = new AdminHome();
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
@@ -800,8 +835,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         int rows = model.getRowCount();
         System.out.println(rows);
         for (int i = 0; i < rows; i++) {
-            String priceStr = model.getValueAt(i, 3).toString();
-            String timeString = model.getValueAt(i, 2).toString();
+            String priceStr = model.getValueAt(i, 4).toString();
+            String timeString = model.getValueAt(i, 3).toString();
             int time = Integer.parseInt(timeString);
             Double price = Double.valueOf(priceStr);
 
@@ -826,6 +861,9 @@ public class AdminReceipt extends javax.swing.JFrame {
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+
+        // xóa tổng tiền
+        TextTotalPrice.setText("");
 
         // xóa ô nội dung ô text
         num.setText("");
@@ -858,7 +896,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__Buttons.setVisible(true);
         Wrapper__JScroll__Receipt.setVisible(false);
         Wrapper__Buttons1.setVisible(false);
-
+        showGreyText();
     }//GEN-LAST:event_ImportBtnClicked
 
     private void ReceiptBtnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptBtnClicked
@@ -910,7 +948,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         DefaultTableModel model4 = (DefaultTableModel) Table4.getModel();
         int rows = Table4.getRowCount();
         for (int j = rows - 1; j >= 0; j--) {
-            model4.removeRow(i);
+            model4.removeRow(j);
         }
         int hang = 0;
         ArrayList<Object[]> data = ReceiptDetailDAO.getInstance().BillPhieuNhap(TextID.getText());
@@ -975,7 +1013,7 @@ public class AdminReceipt extends javax.swing.JFrame {
             Receipt r = new Receipt(ReceiptID, ReceiptCompany, UserID, ReceiptDate);
             int i = ReceiptDAO.getInstance().add(r);
             if (i == 0) {
-                JOptionPane.showMessageDialog(null, "Tạo thành công phôi đơn nhập", "SUCCESS ADD", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Tạo thành công phiếu nhập", "ADD SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                 r.toString();
             }
         }
@@ -1000,6 +1038,47 @@ public class AdminReceipt extends javax.swing.JFrame {
         showDataRightTable();
     }//GEN-LAST:event_deleteItem
 
+    private void updateItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateItem
+        String n = String.valueOf(num.getText());
+        TableModel model = Table1.getModel();
+        int i = Table1.getSelectedRow();
+        String ProductID = model.getValueAt(i, 1).toString();
+        System.out.println(ProductID);
+        ReceiptDetailDAO.getInstance().updateTable1(ProductID, n);
+        showDataRightTable();
+        TotalPrice();
+        showDataRightTable();
+    }//GEN-LAST:event_updateItem
+
+    private void deletedReceipt(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletedReceipt
+        DefaultTableModel model = (DefaultTableModel) Table2.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        ArrayList<Receipt> list = ReceiptDAO.getInstance().getDataForTableReceipt(1);
+        for (int i = 0; i < list.size(); i++) {
+            Receipt r = list.get(i);
+            model.addRow(new Object[]{r.getReceiptID(), r.getReceiptCompany(), r.getUserID(), r.getReceiptDate()});
+        }
+    }//GEN-LAST:event_deletedReceipt
+
+    private void PhieuNhapDaLapdeletedReceipt(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PhieuNhapDaLapdeletedReceipt
+        showDataReceipt();
+    }//GEN-LAST:event_PhieuNhapDaLapdeletedReceipt
+
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
     public void showDataLeftTable() {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         int rows = model.getRowCount();
@@ -1023,15 +1102,20 @@ public class AdminReceipt extends javax.swing.JFrame {
         ArrayList<ReceiptDetail> list = ReceiptDetailDAO.getInstance().getDataForRightTable(TextReceiptID.getText());
         for (int i = 0; i < list.size(); i++) {
             ReceiptDetail r = list.get(i);
-            model.addRow(new Object[]{(i + 1), r.getProductID(), r.getReceiptQuantity(), r.getReceiptPrice()});
+            model.addRow(new Object[]{(i + 1), r.getProductID(), ProductDAO.getInstance().getNameProductFromID(r.getProductID()), r.getReceiptQuantity(), r.getReceiptPrice()});
         }
+    }
+
+    public void setUser(String id) {
+        label_avatar.setText(id);
     }
 
     public void showGreyText() {
         //        điền ô xám
         String i = ReceiptDAO.getInstance().creatReceiptID();
+        String text = label_avatar.getText();
         TextReceiptID.setText(i);
-        TextUserID.setText("user1");
+        TextUserID.setText(text);
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         TextReceiptDate.setText(date.toString());
@@ -1043,7 +1127,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        ArrayList<Receipt> list = ReceiptDAO.getInstance().getDataForTableReceipt();
+        ArrayList<Receipt> list = ReceiptDAO.getInstance().getDataForTableReceipt(0);
         for (int i = 0; i < list.size(); i++) {
             Receipt r = list.get(i);
             model.addRow(new Object[]{r.getReceiptID(), r.getReceiptCompany(), r.getUserID(), r.getReceiptDate()});
@@ -1079,6 +1163,8 @@ public class AdminReceipt extends javax.swing.JFrame {
     private javax.swing.JLabel LabelProductName;
     private javax.swing.JLabel LabelProductName1;
     private javax.swing.JLabel MinusButton1;
+    private javax.swing.JButton PhieuNhapDaLap;
+    private javax.swing.JButton PhieuNhapDaXoa;
     private javax.swing.JPanel PhieuNhapPanel;
     private javax.swing.JLabel ReturnBtn;
     private javax.swing.JButton SearchBtn;
@@ -1115,9 +1201,7 @@ public class AdminReceipt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1132,7 +1216,9 @@ public class AdminReceipt extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel label_avatar;
     private javax.swing.JTextField num;
     private javax.swing.JButton showReceiptBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

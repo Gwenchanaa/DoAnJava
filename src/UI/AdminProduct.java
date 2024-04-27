@@ -29,9 +29,15 @@ public class AdminProduct extends javax.swing.JFrame {
         Table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
         Table.getTableHeader().setOpaque(false);
         Table.getTableHeader().setBackground(new Color(32, 136, 203));
+        TextProductID.setText(createProductID());
+        getListCategoryID();
     }
     // HIỆU ỨNG THANH BAR VÀ CÁC NÚT
     int MousexP, MouseyP;
+    private int x, y;
+    public void setUser(String id) {
+        label_avatar1.setText(id);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,15 +45,13 @@ public class AdminProduct extends javax.swing.JFrame {
 
         Wrapper = new javax.swing.JPanel();
         Wrapper__HeadBar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar1 = new javax.swing.JLabel();
         Wrapper__input = new javax.swing.JPanel();
         LabelCategoryID = new javax.swing.JLabel();
-        TextCategoryID = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         LabelProductID = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -61,6 +65,7 @@ public class AdminProduct extends javax.swing.JFrame {
         LabelQuantity = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         TextProductQuantity = new javax.swing.JTextField();
+        cateComboBox = new javax.swing.JComboBox<>();
         Wrapper__JScrollPane = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         Wrapper__VerticalBar = new javax.swing.JPanel();
@@ -75,6 +80,7 @@ public class AdminProduct extends javax.swing.JFrame {
         AddButton = new javax.swing.JLabel();
         SearchBtn = new javax.swing.JButton();
         ResetBtn = new javax.swing.JButton();
+        TextCategoryID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -95,11 +101,6 @@ public class AdminProduct extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel2.setText("ADMIN1");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -117,6 +118,13 @@ public class AdminProduct extends javax.swing.JFrame {
             }
         });
 
+        label_avatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout Wrapper__HeadBarLayout = new javax.swing.GroupLayout(Wrapper__HeadBar);
         Wrapper__HeadBar.setLayout(Wrapper__HeadBarLayout);
         Wrapper__HeadBarLayout.setHorizontalGroup(
@@ -128,13 +136,11 @@ public class AdminProduct extends javax.swing.JFrame {
                     .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 449, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(267, 267, 267)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(292, 292, 292)
+                .addComponent(label_avatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
                 .addComponent(cancel)
                 .addGap(0, 0, 0))
         );
@@ -148,13 +154,11 @@ public class AdminProduct extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                 .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addComponent(cancel)
-                        .addComponent(jLabel4))
+                    .addComponent(cancel)
                     .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel17)))
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -166,9 +170,6 @@ public class AdminProduct extends javax.swing.JFrame {
         LabelCategoryID.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         LabelCategoryID.setText("ID loại hàng");
 
-        TextCategoryID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
-        TextCategoryID.setBorder(null);
-
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         LabelProductID.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
@@ -176,6 +177,7 @@ public class AdminProduct extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
 
+        TextProductID.setBackground(new java.awt.Color(250, 246, 246));
         TextProductID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
         TextProductID.setBorder(null);
 
@@ -196,35 +198,47 @@ public class AdminProduct extends javax.swing.JFrame {
         TextProductPrice.setBorder(null);
 
         LabelQuantity.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        LabelQuantity.setText("Tồn kho");
+        LabelQuantity.setText("Số lượng");
 
         jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
 
         TextProductQuantity.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
         TextProductQuantity.setBorder(null);
 
+        cateComboBox.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        cateComboBox.setOpaque(true);
+        cateComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectComboBox(evt);
+            }
+        });
+
         javax.swing.GroupLayout Wrapper__inputLayout = new javax.swing.GroupLayout(Wrapper__input);
         Wrapper__input.setLayout(Wrapper__inputLayout);
         Wrapper__inputLayout.setHorizontalGroup(
             Wrapper__inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Wrapper__inputLayout.createSequentialGroup()
-                .addGap(4, 4, 4)
                 .addGroup(Wrapper__inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextCategoryID, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelCategoryID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Wrapper__inputLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(Wrapper__inputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelCategoryID, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(Wrapper__inputLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Wrapper__inputLayout.setVerticalGroup(
@@ -233,8 +247,8 @@ public class AdminProduct extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LabelCategoryID)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TextCategoryID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(LabelProductID)
@@ -272,17 +286,17 @@ public class AdminProduct extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID loại hàng", "ID sản phẩm", "Tên sản phẩm", "Số lượng", "Giá", "Đường dẫn ảnh"
+                "ID loại hàng", "ID sản phẩm", "Tên sản phẩm", "Số lượng", "Giá"
             }
         ));
         Table.setFillsViewportHeight(true);
         Table.setFocusable(false);
         Table.setGridColor(new java.awt.Color(51, 51, 51));
         Table.setRowHeight(28);
-        Table.setRowSelectionAllowed(false);
         Table.setSelectionBackground(new java.awt.Color(232, 57, 95));
         Table.setShowGrid(true);
         Table.getTableHeader().setReorderingAllowed(false);
+        Table.setUpdateSelectionOnSort(false);
         Table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 get_Data_From_Table_Add_To_TextField(evt);
@@ -323,7 +337,7 @@ public class AdminProduct extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Wrapper.add(Wrapper__VerticalBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 66, -1, 750));
+        Wrapper.add(Wrapper__VerticalBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 750));
 
         Wrapper__Image.setBackground(new java.awt.Color(234, 252, 252));
 
@@ -476,6 +490,12 @@ public class AdminProduct extends javax.swing.JFrame {
 
         Wrapper.add(Wrapper__Buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 485, 270, 250));
 
+        TextCategoryID.setBackground(new java.awt.Color(234, 252, 252));
+        TextCategoryID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        TextCategoryID.setForeground(new java.awt.Color(234, 252, 252));
+        TextCategoryID.setBorder(null);
+        Wrapper.add(TextCategoryID, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 750, 40, 10));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -546,6 +566,8 @@ public class AdminProduct extends javax.swing.JFrame {
         AdminHome a = new AdminHome();
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
+        String ID = label_avatar1.getText();
+        a.setUser(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
@@ -580,10 +602,10 @@ public class AdminProduct extends javax.swing.JFrame {
         } else {
             check_full_filling = true;
         }
-        System.out.println(check_full_filling);
+//        System.out.println(check_full_filling);
         if (check_full_filling == true) {
             CategoryID = TextCategoryID.getText();
-            ProductID = TextProductID.getText();
+            ProductID = createProductID();
             ProductName = TextProductName.getText();
             String gia = TextProductPrice.getText();
             String sl = TextProductQuantity.getText();
@@ -635,11 +657,26 @@ public class AdminProduct extends javax.swing.JFrame {
         showData();
     }//GEN-LAST:event_AddButtonClicked
 
+    private String createProductID() {
+        String id = ProductDAO.getInstance().createProductID();
+//        System.out.println(id);
+        return id;
+    }
+
+    private void getListCategoryID() {
+        ArrayList<String> list = ProductDAO.getInstance().getCategories();
+        for (String x : list) {
+//            System.out.println(x);
+            cateComboBox.addItem(x);
+        }
+    }
+
+
     private void ImageBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImageBtnMouseClicked
         JLabel label = new JLabel();
         JPanel panelCon = new JPanel();
         JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new File("C:\\Users\\ACER\\Documents\\Zalo Received Files"));
+        fc.setCurrentDirectory(new File("D:\\04.PTTKhttt\\images"));
         int res = fc.showOpenDialog(null);
 
         panelCon.setBackground(Color.white);
@@ -652,7 +689,7 @@ public class AdminProduct extends javax.swing.JFrame {
             PanelCha.removeAll();
             File f = fc.getSelectedFile();
             Path = f.getAbsolutePath();
-            System.out.println(Path);
+//            System.out.println(Path);
             label.setIcon(convertPathToImage(Path));
             panelCon.add(label);
         }
@@ -672,7 +709,9 @@ public class AdminProduct extends javax.swing.JFrame {
         TextProductName.setText(model.getValueAt(i, 2).toString());
         TextProductQuantity.setText(model.getValueAt(i, 3).toString());
         TextProductPrice.setText(model.getValueAt(i, 4).toString());
-        String h = model.getValueAt(i, 5).toString();
+        String h = ProductDAO.getInstance().getImagePath(TextProductID.getText());
+//        System.out.println("h1 test"+h1);
+//        String h = model.getValueAt(i, 5).toString();
         // Xử lý ảnh
         JLabel label = new JLabel();
         JPanel panelCon = new JPanel();
@@ -693,7 +732,7 @@ public class AdminProduct extends javax.swing.JFrame {
     private void ResetBtnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetBtnClicked
         showData();
         TextCategoryID.setText("");
-        TextProductID.setText("");
+        TextProductID.setText(createProductID());
         TextProductName.setText("");
         TextProductQuantity.setText("");
         TextProductPrice.setText("");
@@ -756,8 +795,10 @@ public class AdminProduct extends javax.swing.JFrame {
         boolean check_full_filling = false;
         // Kiểm tra không được bỏ trống
         if (TextCategoryID.getText().equals("")) {
-            TextCategoryID.requestFocus();
-            JOptionPane.showMessageDialog(null, "Không được bỏ trống ô mã loại hàng", "WRONG INPUT", JOptionPane.WARNING_MESSAGE);
+            String id = cateComboBox.getItemAt(0);
+            TextCategoryID.setText(id);
+//            TextCategoryID.requestFocus();
+//            JOptionPane.showMessageDialog(null, "Không được bỏ trống ô mã loại hàng", "WRONG INPUT", JOptionPane.WARNING_MESSAGE);
         } else if (TextProductID.getText().equals("")) {
             TextProductID.requestFocus();
             JOptionPane.showMessageDialog(null, "Không được bỏ trống ô mã sản phẩm", "WRONG INPUT", JOptionPane.WARNING_MESSAGE);
@@ -823,8 +864,27 @@ public class AdminProduct extends javax.swing.JFrame {
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnMouseExited
 
+    private void selectComboBox(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectComboBox
+        int i = cateComboBox.getSelectedIndex();
+//        System.out.println(i);
+        String s = cateComboBox.getItemAt(i);
+        TextCategoryID.setText(s);
+    }//GEN-LAST:event_selectComboBox
+
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
     private ImageIcon convertPathToImage(String Path) {
-        System.out.println(Path);
+//        System.out.println(Path);
         ImageIcon icon = new ImageIcon(Path);
         Image img = icon.getImage();
         ImageIcon i = new ImageIcon(img);
@@ -841,7 +901,7 @@ public class AdminProduct extends javax.swing.JFrame {
         ArrayList<Product> list = ProductDAO.getInstance().getDataFromTable();
         for (int i = 0; i < list.size(); i++) {
             Product p = list.get(i);
-            model.addRow(new Object[]{p.getCategoryID(), p.getProductID(), p.getProductName(), p.getProductQuantity(), p.getPrice(), p.getProductImage()});
+            model.addRow(new Object[]{p.getCategoryID(), p.getProductID(), p.getProductName(), p.getProductQuantity(), p.getPrice()});
         }
     }
 
@@ -888,16 +948,16 @@ public class AdminProduct extends javax.swing.JFrame {
     private javax.swing.JPanel Wrapper__VerticalBar;
     private javax.swing.JPanel Wrapper__input;
     private javax.swing.JLabel cancel;
+    private javax.swing.JComboBox<String> cateComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel label_avatar1;
     // End of variables declaration//GEN-END:variables
 }

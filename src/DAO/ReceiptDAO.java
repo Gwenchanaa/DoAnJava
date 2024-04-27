@@ -43,9 +43,9 @@ public class ReceiptDAO {
             String sql = "insert into Receipts(ReceiptID, ReceiptCompany, UserID, ReceiptDate) "
                     + "values('" + t.getReceiptID() + "', '" + t.getReceiptCompany() + "', '" + t.getUserID()
                     + "', '" + t.getReceiptDate() + "') ";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             JDBC.closeConnection(c);
             i = 0;
         } catch (SQLException ex) {
@@ -58,11 +58,12 @@ public class ReceiptDAO {
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
-            String sql = "delete  from Receipts "
+            String sql = "update Receipts "
+                    + "set Statuss = 0"
                     + "where ReceiptID = '" + r.getReceiptID() + "' ";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             if (kq != 0) {
 //                JOptionPane.showMessageDialog(null, "Xóa thành công", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -100,7 +101,6 @@ public class ReceiptDAO {
             String sql = "select top 1 ReceiptID\n"
                     + "from Receipts\n"
                     + "order by ReceiptID desc ";
-            System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 String a = rs.getString("ReceiptID");
@@ -128,15 +128,10 @@ public class ReceiptDAO {
                     + "set "
                     + "TotalPrice = '" + ReceiptPrice + "' "
                     + "where ReceiptID = '" + ReceiptID + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay đổi");
+//            System.out.println(kq + " thay đổi");
             JDBC.closeConnection(c);
-//            if (kq == 0) {
-//                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Sửa thành công " + t.getProductID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-//            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -153,28 +148,29 @@ public class ReceiptDAO {
                     + "UserID = '" + r.getUserID() + "', "
                     + "ReceiptDate = '" + r.getReceiptDate() + "' "
                     + "where ReceiptID = '" + r.getReceiptID() + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
             System.out.println(kq + " thay đổi");
             JDBC.closeConnection(c);
-//            if (kq == 0) {
-//                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Sửa thành công " + t.getProductID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-//            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return 0;
     }
 
-    public ArrayList<Receipt> getDataForTableReceipt() {
+    public ArrayList<Receipt> getDataForTableReceipt(int status) {
         ArrayList<Receipt> list = new ArrayList<>();
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
-            String sql = "select * from Receipts";
+            String sql = "UPDATE Receipts\n"
+                    + "SET Statuss = 1\n"
+                    + "WHERE Statuss IS NULL; "
+                    + "select * "
+                    + "from Receipts\n"
+                    + "where Statuss != " + status;
             ResultSet rs = st.executeQuery(sql);
+//            System.out.println(sql);
 
             while (rs.next()) {
                 String ReceiptID = rs.getString("ReceiptID");
@@ -198,13 +194,13 @@ public class ReceiptDAO {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
             String sql = "select TotalPrice from Receipts\n"
-                    + "where ReceiptID = '"+ID+"'";
-            System.out.println(sql);
+                    + "where ReceiptID = '" + ID + "'";
+//            System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             rs.next();
             double money = rs.getDouble("TotalPrice");
             moneyStr = String.valueOf(money);
-            moneyStr = moneyStr +" Đ";
+            moneyStr = moneyStr + " Đ";
             JDBC.closeConnection(c);
         } catch (SQLException ex) {
             ex.printStackTrace();

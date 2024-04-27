@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
@@ -11,25 +7,24 @@ package model;
 
 public class Customer {
 
-    private int CustomerId;
-    private String CustomerName,CustomerPhone,CustomerAddress;
+    String CustomerID, CustomerName,CustomerPhone,CustomerAddress;
 
     public Customer() {
     }
 
-    public Customer(int CustomerId, String CustomerName, String CustomerPhone, String CustomerAddress) {
-        this.CustomerId = CustomerId;
+    public Customer(String CustomerID, String CustomerName, String CustomerPhone, String CustomerAddress) {
+        this.CustomerID = CustomerID;
         this.CustomerName = CustomerName;
         this.CustomerPhone = CustomerPhone;
         this.CustomerAddress = CustomerAddress;
     }
 
-    public int getCustomerId() {
-        return CustomerId;
+    public String getCustomerID() {
+        return CustomerID;
     }
 
-    public void setCustomerId(int CustomerId) {
-        this.CustomerId = CustomerId;
+    public void setCustomerID(String CustomerID) {
+        this.CustomerID = CustomerID;
     }
 
     public String getCustomerName() {
@@ -55,6 +50,10 @@ public class Customer {
     public void setCustomerAddress(String CustomerAddress) {
         this.CustomerAddress = CustomerAddress;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Customer{" + "CustomerID=" + CustomerID + ", CustomerName=" + CustomerName + ", CustomerPhone=" + CustomerPhone + ", CustomerAddress=" + CustomerAddress + '}';
+    }
+    
 }

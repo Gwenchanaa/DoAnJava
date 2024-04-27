@@ -1,143 +1,103 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 
-import DAL.DaoCustomer;
+import BUS.function;
+import DAO.CustomerDAO;
+import java.awt.Color;
+import java.awt.Font;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Customer;
 
 public class AdminCustomer extends javax.swing.JFrame {
-    
-       private static JTable table;
-    DaoCustomer dal = new DaoCustomer();
-    int j;
 
     List<Customer> container = new ArrayList<>();
 
     public AdminCustomer() {
         initComponents();
-         showData(dal.getAll());
+        Table.getTableHeader().setOpaque(false);
+        Table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        Table.getTableHeader().setOpaque(false);
+        Table.getTableHeader().setBackground(new Color(32, 136, 203));
+        createCustomerID();
+        showData();
     }
-    
-    public static boolean containsLetters(String input) {
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
-        Matcher matcher = pattern.matcher(input);
-        return matcher.find();
-    }
 
-    public void showData(List<Customer> customer1) {
-        List<Customer> ListCustomer = new ArrayList<>();
-        ListCustomer = customer1;
-        DefaultTableModel table = (DefaultTableModel) bang.getModel();
-        table.setRowCount(0);
-        ListCustomer.forEach((customer) -> {
-            table.addRow(new Object[]{
-                customer.getCustomerId(),
-                customer.getCustomerName(),
-                customer.getCustomerPhone(),
-                customer.getCustomerAddress(),
-      
-
-            });
-
-            container.add(customer);
-
-        });
-
-    }
     int MousepX, MousepY;
-
+    private int x, y;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        Verticalbar = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        VerticalBar = new javax.swing.JPanel();
         ReturnBtn = new javax.swing.JLabel();
         HeadBar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        label_avatar = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        CustomerID = new javax.swing.JTextField();
+        TextCustomerID = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel13 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        CustomerName = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        CustomerPhone = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        CustomerAddress = new javax.swing.JTextField();
+        TextCustomerName = new javax.swing.JTextField();
+        TextCustomerAddress = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        TextCustomerPhone = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
-        jPanel8 = new javax.swing.JPanel();
-        UpdateButton = new javax.swing.JLabel();
-        MinusButton = new javax.swing.JLabel();
-        search = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        bang = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Table = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        MinusButton = new javax.swing.JLabel();
+        UpdateButton = new javax.swing.JLabel();
         AddButton = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        SearchBtn = new javax.swing.JButton();
+        ResetBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                home(evt);
-            }
-        });
 
-        jPanel1.setBackground(new java.awt.Color(234, 252, 252));
+        jPanel4.setBackground(new java.awt.Color(234, 252, 252));
 
-        Verticalbar.setBackground(new java.awt.Color(198, 249, 249));
+        VerticalBar.setBackground(new java.awt.Color(198, 249, 249));
 
         ReturnBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Vertical_Bar_Normal_Return.png"))); // NOI18N
         ReturnBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backHome(evt);
+                home(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 ReturnBtnMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                ReturnBtnMouseExited(evt);
+                ReturnBtnExited(evt);
             }
         });
 
-        javax.swing.GroupLayout VerticalbarLayout = new javax.swing.GroupLayout(Verticalbar);
-        Verticalbar.setLayout(VerticalbarLayout);
-        VerticalbarLayout.setHorizontalGroup(
-            VerticalbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerticalbarLayout.createSequentialGroup()
+        javax.swing.GroupLayout VerticalBarLayout = new javax.swing.GroupLayout(VerticalBar);
+        VerticalBar.setLayout(VerticalBarLayout);
+        VerticalBarLayout.setHorizontalGroup(
+            VerticalBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerticalBarLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(ReturnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(ReturnBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
         );
-        VerticalbarLayout.setVerticalGroup(
-            VerticalbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(VerticalbarLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(ReturnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(432, Short.MAX_VALUE))
+        VerticalBarLayout.setVerticalGroup(
+            VerticalBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VerticalBarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(ReturnBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         HeadBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -152,11 +112,6 @@ public class AdminCustomer extends javax.swing.JFrame {
                 HeadBarMousePressed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel2.setText("ADMIN1");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
@@ -175,6 +130,13 @@ public class AdminCustomer extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout HeadBarLayout = new javax.swing.GroupLayout(HeadBar);
         HeadBar.setLayout(HeadBarLayout);
         HeadBarLayout.setHorizontalGroup(
@@ -186,13 +148,11 @@ public class AdminCustomer extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addGap(167, 167, 167)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(91, 91, 91)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(222, 222, 222)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
                 .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
@@ -205,115 +165,142 @@ public class AdminCustomer extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(HeadBarLayout.createSequentialGroup()
                 .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
                     .addComponent(cancel)
                     .addGroup(HeadBarLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))))
+                        .addContainerGap()
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel9.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
         jLabel9.setText("ID khách hàng");
 
-        CustomerID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
-        CustomerID.setBorder(null);
+        TextCustomerID.setBackground(new java.awt.Color(246, 241, 241));
+        TextCustomerID.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        TextCustomerID.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel13.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
-        jLabel13.setText("Họ và tên");
+        jLabel13.setText("Họ tên");
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
 
-        CustomerName.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
-        CustomerName.setBorder(null);
+        TextCustomerName.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        TextCustomerName.setBorder(null);
 
-        jLabel16.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
-        jLabel16.setText("Số điện thoại");
+        TextCustomerAddress.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        TextCustomerAddress.setBorder(null);
 
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
+        jLabel14.setText("Số điện thoại");
 
-        CustomerPhone.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
-        CustomerPhone.setBorder(null);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Địa Chỉ");
-
-        CustomerAddress.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TextCustomerPhone.setFont(new java.awt.Font("Segoe UI Light", 2, 14)); // NOI18N
+        TextCustomerPhone.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        jLabel16.setFont(new java.awt.Font("Serif", 1, 16)); // NOI18N
+        jLabel16.setText("Địa chỉ");
+
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator3)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(CustomerPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(CustomerName, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addComponent(CustomerID, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerAddress))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TextCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel16)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TextCustomerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TextCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(234, 252, 252));
+        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalUpdate.png"))); // NOI18N
-        UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                UpdateButtonMouseClicked(evt);
+        Table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Table.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
+        Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID khách hàng", "Họ tên", "Số điện thoại", "Địa chỉ"
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                UpdateButtonupdateEnter(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                UpdateButtonupdateNormal(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        Table.setFillsViewportHeight(true);
+        Table.setFocusable(false);
+        Table.setGridColor(new java.awt.Color(51, 51, 51));
+        Table.setRowHeight(28);
+        Table.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        Table.setShowGrid(true);
+        Table.setUpdateSelectionOnSort(false);
+        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Table);
+        if (Table.getColumnModel().getColumnCount() > 0) {
+            Table.getColumnModel().getColumn(0).setResizable(false);
+            Table.getColumnModel().getColumn(1).setResizable(false);
+            Table.getColumnModel().getColumn(2).setResizable(false);
+            Table.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jPanel8.setBackground(new java.awt.Color(234, 252, 252));
 
         MinusButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalMinus.png"))); // NOI18N
         MinusButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -321,79 +308,23 @@ public class AdminCustomer extends javax.swing.JFrame {
                 MinusButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                MinusButtonminusEnter(evt);
+                minusEnter(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                MinusButtonminusNormal(evt);
+                minusNormal(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(UpdateButton)
-                .addGap(30, 30, 30)
-                .addComponent(MinusButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
-        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        bang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bang.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
-        bang.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID khách hàng", "Họ và Tên", "sđt", "Địa Chỉ"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        bang.setFillsViewportHeight(true);
-        bang.setGridColor(new java.awt.Color(51, 51, 51));
-        bang.setRowHeight(40);
-        bang.setRowMargin(2);
-        bang.setRowSelectionAllowed(false);
-        bang.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        bang.setSelectionForeground(new java.awt.Color(0, 255, 51));
-        bang.setShowGrid(true);
-        bang.addMouseListener(new java.awt.event.MouseAdapter() {
+        UpdateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BarTool_NormalUpdate.png"))); // NOI18N
+        UpdateButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bangMouseClicked(evt);
+                UpdateButtonMouseClicked(evt);
             }
-        });
-        jScrollPane1.setViewportView(bang);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/showwwall.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateEnter(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateNormal(evt);
             }
         });
 
@@ -403,80 +334,113 @@ public class AdminCustomer extends javax.swing.JFrame {
                 AddButtonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                AddButtonplusEnter(evt);
+                plusEnter(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                AddButtonplusNormal(evt);
+                plusNormal(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/icons8-search-100.png"))); // NOI18N
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(Verticalbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(AddButton)
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(AddButton)
+                .addGap(63, 63, 63)
+                .addComponent(UpdateButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(MinusButton)
+                .addGap(15, 15, 15))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AddButton)
+                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MinusButton))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        SearchBtn.setBackground(new java.awt.Color(6, 214, 160));
+        SearchBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        SearchBtn.setText("Tìm kiếm");
+        SearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchBtnSearchButtonClicked(evt);
+            }
+        });
+
+        ResetBtn.setBackground(new java.awt.Color(6, 214, 160));
+        ResetBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        ResetBtn.setText("Reload");
+        ResetBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResetBtnClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(VerticalBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(109, 109, 109))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
+            .addComponent(HeadBar, javax.swing.GroupLayout.DEFAULT_SIZE, 1039, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(HeadBar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(47, 47, 47)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Verticalbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VerticalBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -486,45 +450,55 @@ public class AdminCustomer extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_cancelMouseClicked
 
+    public void setUser(String id) {
+        label_avatar.setText(id);
+    }
+    
     private void home(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home
-
+        AdminHome a = new AdminHome();
+        a.setVisible(true);
+        int x1 = this.getX(), y1 = this.getY();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
+        a.setPositionForWin(x1, y1);
+        dispose();
     }//GEN-LAST:event_home
 
-    private void MinusButtonminusEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinusButtonminusEnter
-        URL iconURL = getClass().getResource("/icon/BarTool_EnterMinus.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        MinusButton.setIcon(img);
-    }//GEN-LAST:event_MinusButtonminusEnter
-
-    private void MinusButtonminusNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinusButtonminusNormal
-        URL iconURL = getClass().getResource("/icon/BarTool_NormalMinus.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        MinusButton.setIcon(img);
-    }//GEN-LAST:event_MinusButtonminusNormal
-
-    private void UpdateButtonupdateEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonupdateEnter
-        URL iconURL = getClass().getResource("/icon/BarTool_EnterUpdate.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        UpdateButton.setIcon(img);
-    }//GEN-LAST:event_UpdateButtonupdateEnter
-
-    private void UpdateButtonupdateNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonupdateNormal
-        URL iconURL = getClass().getResource("/icon/BarTool_NormalUpdate.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        UpdateButton.setIcon(img);
-    }//GEN-LAST:event_UpdateButtonupdateNormal
-
-    private void AddButtonplusEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonplusEnter
+    private void plusEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_plusEnter
         URL iconURL = getClass().getResource("/icon/BarTool_EnterAdd.png");
         ImageIcon img = new ImageIcon(iconURL);
         AddButton.setIcon(img);
-    }//GEN-LAST:event_AddButtonplusEnter
+    }//GEN-LAST:event_plusEnter
 
-    private void AddButtonplusNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonplusNormal
+    private void plusNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_plusNormal
         URL iconURL = getClass().getResource("/icon/BarTool_NormalAdd.png");
         ImageIcon img = new ImageIcon(iconURL);
         AddButton.setIcon(img);
-    }//GEN-LAST:event_AddButtonplusNormal
+    }//GEN-LAST:event_plusNormal
+
+    private void updateEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateEnter
+        URL iconURL = getClass().getResource("/icon/BarTool_EnterUpdate.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        UpdateButton.setIcon(img);
+    }//GEN-LAST:event_updateEnter
+
+    private void updateNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateNormal
+        URL iconURL = getClass().getResource("/icon/BarTool_NormalUpdate.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        UpdateButton.setIcon(img);
+    }//GEN-LAST:event_updateNormal
+
+    private void minusEnter(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minusEnter
+        URL iconURL = getClass().getResource("/icon/BarTool_EnterMinus.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        MinusButton.setIcon(img);
+    }//GEN-LAST:event_minusEnter
+
+    private void minusNormal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minusNormal
+        URL iconURL = getClass().getResource("/icon/BarTool_NormalMinus.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        MinusButton.setIcon(img);
+    }//GEN-LAST:event_minusNormal
 
     private void HeadBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeadBarMouseDragged
         int x = evt.getXOnScreen();
@@ -538,211 +512,181 @@ public class AdminCustomer extends javax.swing.JFrame {
         MousepY = evt.getY();
     }//GEN-LAST:event_HeadBarMousePressed
 
-    private void backHome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backHome
-        AdminHome a = new AdminHome();
-        a.setVisible(true);
-        int x1 = this.getX(), y1 = this.getY();
-        a.setPositionForWin(x1, y1);
-        dispose();
-    }//GEN-LAST:event_backHome
-
     private void ReturnBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseEntered
         URL iconURL = getClass().getResource("/icon/Vertical_Bar_Enter_Return.png");
         ImageIcon img = new ImageIcon(iconURL);
         ReturnBtn.setIcon(img);
     }//GEN-LAST:event_ReturnBtnMouseEntered
 
-    private void ReturnBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnMouseExited
+    private void ReturnBtnExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnExited
         URL iconURL = getClass().getResource("/icon/Vertical_Bar_Normal_Return.png");
         ImageIcon img = new ImageIcon(iconURL);
-        ReturnBtn.setIcon(img);    }//GEN-LAST:event_ReturnBtnMouseExited
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        showData(dal.getAll());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ReturnBtn.setIcon(img);
+    }//GEN-LAST:event_ReturnBtnExited
 
     private void AddButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddButtonMouseClicked
-        // TODO add your handling code here:
-        
         boolean check = false;
-        if (CustomerID.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerID.requestFocus();
-        } else if (CustomerName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerName.requestFocus();
-        } else if (CustomerPhone.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerPhone.requestFocus();
-        } else if (CustomerAddress.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerAddress.requestFocus();
-        }
-
-        else {
-            {
+        if (TextCustomerID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerID.requestFocus();
+        } else if (TextCustomerName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerName.requestFocus();
+        } else if (TextCustomerPhone.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerPhone.requestFocus();
+        } else if (TextCustomerAddress.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerAddress.requestFocus();
+        } else if (!TextCustomerPhone.getText().isEmpty()) {
+            String phone = TextCustomerPhone.getText();
+            if (function.checkPhone(phone) == false) {
+                JOptionPane.showMessageDialog(null, "Nhập đúng sđt");
+                TextCustomerPhone.requestFocus();
+            } else {
                 check = true;
             }
-
-            if (check == true) {
-                Customer nv = new Customer();
-                nv.setCustomerId(Integer.parseInt(CustomerID.getText()));
-                nv.setCustomerName(CustomerName.getText());               
-                if (containsLetters(CustomerPhone.getText()) ) {
-                    JOptionPane.showMessageDialog(null, "phai nhap la so");
-                    CustomerPhone.setText("");                   
-                    CustomerPhone.requestFocus();
-                } else {
-
-                  nv.setCustomerPhone(CustomerPhone.getText());
-                  nv.setCustomerAddress(CustomerAddress.getText());
-
-              
-                        j = dal.insert(nv);
-                    
-
-                    if (j == 0) {
-                        JOptionPane.showMessageDialog(null, "insert sucssec");
-
-                    }
-                    if (j == 1) {
-                        CustomerID.setText("");
-                        CustomerID.requestFocus();
-                        JOptionPane.showMessageDialog(null, "Không tồn tại ");
-                    }
-                    if (j == 2) {
-                        JOptionPane.showMessageDialog(null, "trung id so" + nv.getCustomerId()+ "");
-                        CustomerID.setText("");
-                        CustomerID.requestFocus();
-                    }
-                    showData(dal.getAll());
-                    System.out.println("kk");
-
-                    CustomerID.setText("");
-                    CustomerName.setText("");
-                    CustomerPhone.setText("");
-                    CustomerAddress.setText("");
-     
-
-                }
-            }
-        }
-    }//GEN-LAST:event_AddButtonMouseClicked
-
-    private void UpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonMouseClicked
-        // TODO add your handling code here:
-          boolean check = false;
-        if (CustomerID.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerID.requestFocus();
-        } else if (CustomerName.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerName.requestFocus();
-        } else if (CustomerPhone.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerPhone.requestFocus();
-        } else if (CustomerAddress.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "khong duoc bo trong");
-            CustomerAddress.requestFocus();
-        
         } else {
             check = true;
         }
 
         if (check == true) {
-            Customer cus = new Customer();
+            String CustomerID = TextCustomerID.getText();
+            String CustomerName = TextCustomerName.getText();
+            String CustomerPhone = TextCustomerPhone.getText();
+            String CustomerAddress = TextCustomerAddress.getText();
 
-            cus.setCustomerId(Integer.parseInt(CustomerID.getText()));
-            cus.setCustomerName(CustomerName.getText());
-          
-            if (containsLetters(CustomerPhone.getText()) ) {
-                JOptionPane.showMessageDialog(null, "phai nhap la so");
-                CustomerPhone.requestFocus();
-            } else {
-                cus.setCustomerPhone(CustomerPhone.getText());
-            cus.setCustomerAddress(CustomerAddress.getText());
-               
-                    dal.update(cus);
-                
-                JOptionPane.showMessageDialog(null, "UPDATE sucseccfull");
-                showData(dal.getAll());
-                CustomerID.setText("");
-                CustomerName.setText("");
-                CustomerPhone.setText("");
-                CustomerAddress.setText("");
-       
-            }
-
+            Customer c = new Customer(CustomerID, CustomerName, CustomerPhone, CustomerAddress);
+            CustomerDAO.getInstance().insert(c);
         }
-        
-        
+        showData();
+    }//GEN-LAST:event_AddButtonMouseClicked
+
+    public void createCustomerID() {
+        String id = CustomerDAO.getInstance().createCustomerID();
+        TextCustomerID.setText(id);
+    }
+
+    private void UpdateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateButtonMouseClicked
+        boolean check = false;
+        if (TextCustomerID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerID.requestFocus();
+        } else if (TextCustomerName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerName.requestFocus();
+        } else if (TextCustomerPhone.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerPhone.requestFocus();
+        } else if (TextCustomerAddress.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không bỏ trống");
+            TextCustomerAddress.requestFocus();
+        } else if (!TextCustomerPhone.getText().isEmpty()) {
+            String phone = TextCustomerPhone.getText();
+            if (function.checkPhone(phone) == false) {
+                JOptionPane.showMessageDialog(null, "Nhập đúng sđt");
+                TextCustomerPhone.requestFocus();
+            } else {
+                check = true;
+            }
+        } else {
+            check = true;
+        }
+
+        if (check == true) {
+
+            String CustomerID = TextCustomerID.getText();
+            String CustomerName = TextCustomerName.getText();
+            String CustomerPhone = TextCustomerPhone.getText();
+            String CustomerAddress = TextCustomerAddress.getText();
+
+            Customer c = new Customer(CustomerID, CustomerName, CustomerPhone, CustomerAddress);
+            CustomerDAO.getInstance().update(c);
+            showData();
+        }
     }//GEN-LAST:event_UpdateButtonMouseClicked
 
     private void MinusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MinusButtonMouseClicked
-        // TODO add your handling code here:
-        
-          Customer cuss = new Customer();
-            cuss.setCustomerId(Integer.parseInt(CustomerID.getText()));
-            dal.delete(cuss);
-            JOptionPane.showMessageDialog(null, "delete sucseccfull");
-            showData(dal.getAll());
-            CustomerID.setText("");
-            CustomerName.setText("");
-            CustomerPhone.setText("");
-            CustomerAddress.setText("");
-       
+        String CustomerID = TextCustomerID.getText();
+        String CustomerName = TextCustomerName.getText();
+        String CustomerPhone = TextCustomerPhone.getText();
+        String CustomerAddress = TextCustomerAddress.getText();
+        Customer c = new Customer(CustomerID, CustomerName, CustomerPhone, CustomerAddress);
+        CustomerDAO.getInstance().delete(c);
+        showData();
+        TextCustomerName.setText("");
     }//GEN-LAST:event_MinusButtonMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        
-         Customer cuss = new Customer();
-        cuss.setCustomerName(search.getText());
+    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
+        int count = Table.getSelectedRow();
+        TableModel model = Table.getModel();
+        TextCustomerID.setText(model.getValueAt(count, 0).toString());
+        TextCustomerName.setText(model.getValueAt(count, 1).toString());
+        TextCustomerPhone.setText(model.getValueAt(count, 2).toString());
+        TextCustomerAddress.setText(model.getValueAt(count, 3).toString());
+    }//GEN-LAST:event_TableMouseClicked
 
-        showData(dal.finCustomersByName(cuss));
-    }//GEN-LAST:event_jButton2MouseClicked
+    private void SearchBtnSearchButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchBtnSearchButtonClicked
+        String CustomerID = TextCustomerID.getText();
+        String CustomerName = TextCustomerName.getText();
+        String CustomerPhone = TextCustomerPhone.getText();
+        String CustomerAddress = TextCustomerAddress.getText();
+        Customer c = new Customer(CustomerID, CustomerName, CustomerPhone, CustomerAddress);
 
-    private void bangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bangMouseClicked
-        // TODO add your handling code here:
-        
-          int count = bang.getSelectedRow();
-        TableModel model = bang.getModel();
-        CustomerID.setText(model.getValueAt(count, 0).toString());
-        CustomerName.setText(model.getValueAt(count, 1).toString());
-        CustomerPhone.setText(model.getValueAt(count, 2).toString());
-        CustomerAddress.setText(model.getValueAt(count, 3).toString());
-      
-    }//GEN-LAST:event_bangMouseClicked
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+        // làm sạch bảng 
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        // lấy danh sách mới đổ vào bảng
+        ArrayList<Customer> list = CustomerDAO.getInstance().findCustomer(c);
+        for (int i = 0; i < list.size(); i++) {
+            Customer c1 = list.get(i);
+            model.addRow(new Object[]{c1.getCustomerID(), c1.getCustomerName(), c1.getCustomerPhone(), c1.getCustomerAddress()});
+        }
+    }//GEN-LAST:event_SearchBtnSearchButtonClicked
+
+    private void ResetBtnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetBtnClicked
+        showData();
+        createCustomerID();
+        TextCustomerName.setText("");
+        TextCustomerPhone.setText("");
+        TextCustomerAddress.setText("");
+    }//GEN-LAST:event_ResetBtnClicked
+
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
+    public void showData() {
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+        // làm sạch bảng 
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+
+        ArrayList<Customer> list = CustomerDAO.getInstance().getAll();
+        for (int i = 0; i < list.size(); i++) {
+            Customer c = list.get(i);
+            model.addRow(new Object[]{c.getCustomerID(), c.getCustomerName(), c.getCustomerPhone(), c.getCustomerAddress()});
+        }
+    }
+
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 AdminCustomer a = new AdminCustomer();
@@ -753,36 +697,34 @@ public class AdminCustomer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddButton;
-    private javax.swing.JTextField CustomerAddress;
-    private javax.swing.JTextField CustomerID;
-    private javax.swing.JTextField CustomerName;
-    private javax.swing.JTextField CustomerPhone;
     private javax.swing.JPanel HeadBar;
     private javax.swing.JLabel MinusButton;
+    private javax.swing.JButton ResetBtn;
     private javax.swing.JLabel ReturnBtn;
+    private javax.swing.JButton SearchBtn;
+    private javax.swing.JTable Table;
+    private javax.swing.JTextField TextCustomerAddress;
+    private javax.swing.JTextField TextCustomerID;
+    private javax.swing.JTextField TextCustomerName;
+    private javax.swing.JTextField TextCustomerPhone;
     private javax.swing.JLabel UpdateButton;
-    private javax.swing.JPanel Verticalbar;
-    private javax.swing.JTable bang;
+    private javax.swing.JPanel VerticalBar;
     private javax.swing.JLabel cancel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField search;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JLabel label_avatar;
     // End of variables declaration//GEN-END:variables
 }

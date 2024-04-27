@@ -18,11 +18,14 @@ public class AdminOrder extends javax.swing.JFrame {
         PhieuNhapPanel.setVisible(false);
         showDataLeftTable();
         showDataRightTable();
-        showGreyText();
         showDataOrder();
     }
-
+    private int x, y;
     int MousexP, MouseyP;
+
+    public void setUser(String id) {
+        label_avatar.setText(id);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -43,12 +46,11 @@ public class AdminOrder extends javax.swing.JFrame {
         TextMoney = new javax.swing.JTextField();
         TextDate = new javax.swing.JTextField();
         Wrapper__HeadBar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar = new javax.swing.JLabel();
         Wrapper__input = new javax.swing.JPanel();
         LabelCategoryID = new javax.swing.JLabel();
         TextOrderID = new javax.swing.JTextField();
@@ -76,12 +78,13 @@ public class AdminOrder extends javax.swing.JFrame {
         LabelCategoryID3 = new javax.swing.JLabel();
         TextTotalPrice = new javax.swing.JTextField();
         ImportProductBtn1 = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
         Wrapper__JScroll__ProductImport = new javax.swing.JScrollPane();
         Table1 = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         showReceiptBtn = new javax.swing.JButton();
         ImportBtn = new javax.swing.JButton();
-        Wrapper__JScroll__Receipt = new javax.swing.JScrollPane();
+        Wrapper__JScroll__Order = new javax.swing.JScrollPane();
         Table2 = new javax.swing.JTable();
         Wrapper__Buttons1 = new javax.swing.JPanel();
         MinusButton1 = new javax.swing.JLabel();
@@ -97,6 +100,8 @@ public class AdminOrder extends javax.swing.JFrame {
         LabelProductName1 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         TextOrderDate2 = new javax.swing.JTextField();
+        HoaDonDaLap = new javax.swing.JButton();
+        HoaDonDaXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -242,11 +247,6 @@ public class AdminOrder extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel2.setText("ADMIN1");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -264,6 +264,13 @@ public class AdminOrder extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout Wrapper__HeadBarLayout = new javax.swing.GroupLayout(Wrapper__HeadBar);
         Wrapper__HeadBar.setLayout(Wrapper__HeadBarLayout);
         Wrapper__HeadBarLayout.setHorizontalGroup(
@@ -275,37 +282,35 @@ public class AdminOrder extends javax.swing.JFrame {
                     .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
                 .addComponent(jLabel17)
-                .addGap(332, 332, 332)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(316, 316, 316)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(cancel)
                 .addGap(0, 0, 0))
         );
         Wrapper__HeadBarLayout.setVerticalGroup(
             Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Wrapper__HeadBarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
+                .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel17))
+                    .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15)))
                 .addGap(33, 33, 33))
             .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
                 .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Wrapper__HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addComponent(cancel)
-                        .addComponent(jLabel4))
-                    .addGroup(Wrapper__HeadBarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)))
+                    .addComponent(cancel)
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        Wrapper.add(Wrapper__HeadBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1174, 60));
+        Wrapper.add(Wrapper__HeadBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1174, 70));
 
         Wrapper__input.setBackground(new java.awt.Color(234, 252, 252));
         Wrapper__input.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -369,9 +374,9 @@ public class AdminOrder extends javax.swing.JFrame {
                 CreateOrderBtnMouseClicked(evt);
             }
         });
-        Wrapper__input.add(CreateOrderBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 274, -1, -1));
+        Wrapper__input.add(CreateOrderBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, -1, -1));
 
-        Wrapper.add(Wrapper__input, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 400, 300));
+        Wrapper.add(Wrapper__input, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 400, 340));
 
         Table.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Table.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -430,7 +435,7 @@ public class AdminOrder extends javax.swing.JFrame {
                 .addContainerGap(682, Short.MAX_VALUE))
         );
 
-        Wrapper.add(Wrapper__VerticalBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 56, -1, 760));
+        Wrapper.add(Wrapper__VerticalBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 760));
 
         Wrapper__Buttons.setBackground(new java.awt.Color(234, 252, 252));
         Wrapper__Buttons.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -443,7 +448,7 @@ public class AdminOrder extends javax.swing.JFrame {
                 XuatHangClicked(evt);
             }
         });
-        Wrapper__Buttons.add(ImportProductBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 150, 30));
+        Wrapper__Buttons.add(ImportProductBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 150, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -511,9 +516,19 @@ public class AdminOrder extends javax.swing.JFrame {
                 deleteItem(evt);
             }
         });
-        Wrapper__Buttons.add(ImportProductBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 180, 30));
+        Wrapper__Buttons.add(ImportProductBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 110, 30));
 
-        Wrapper.add(Wrapper__Buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 560, 310));
+        updateBtn.setBackground(new java.awt.Color(6, 214, 160));
+        updateBtn.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        updateBtn.setText("Sửa chi tiết");
+        updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateItem(evt);
+            }
+        });
+        Wrapper__Buttons.add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 110, -1));
+
+        Wrapper.add(Wrapper__Buttons, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 580, 320));
 
         Table1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         Table1.setFont(new java.awt.Font("Serif", 0, 14)); // NOI18N
@@ -522,11 +537,11 @@ public class AdminOrder extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Tên sản phẩm", "Số lượng nhập", "đơn giá"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng nhập", "Đơn giá"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -543,9 +558,14 @@ public class AdminOrder extends javax.swing.JFrame {
         Wrapper__JScroll__ProductImport.setViewportView(Table1);
         if (Table1.getColumnModel().getColumnCount() > 0) {
             Table1.getColumnModel().getColumn(0).setResizable(false);
-            Table1.getColumnModel().getColumn(0).setPreferredWidth(15);
+            Table1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(1).setResizable(false);
             Table1.getColumnModel().getColumn(1).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(2).setResizable(false);
+            Table1.getColumnModel().getColumn(3).setResizable(false);
             Table1.getColumnModel().getColumn(3).setPreferredWidth(0);
+            Table1.getColumnModel().getColumn(4).setResizable(false);
+            Table1.getColumnModel().getColumn(4).setPreferredWidth(0);
         }
 
         Wrapper.add(Wrapper__JScroll__ProductImport, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 550, 340));
@@ -607,7 +627,7 @@ public class AdminOrder extends javax.swing.JFrame {
                 RowSelectedTable2(evt);
             }
         });
-        Wrapper__JScroll__Receipt.setViewportView(Table2);
+        Wrapper__JScroll__Order.setViewportView(Table2);
         if (Table2.getColumnModel().getColumnCount() > 0) {
             Table2.getColumnModel().getColumn(0).setResizable(false);
             Table2.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -617,7 +637,7 @@ public class AdminOrder extends javax.swing.JFrame {
             Table2.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        Wrapper.add(Wrapper__JScroll__Receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 550, 370));
+        Wrapper.add(Wrapper__JScroll__Order, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, 550, 370));
 
         Wrapper__Buttons1.setBackground(new java.awt.Color(234, 252, 252));
         Wrapper__Buttons1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -658,7 +678,7 @@ public class AdminOrder extends javax.swing.JFrame {
                 ViewReceiptDetailsClicked(evt);
             }
         });
-        Wrapper__Buttons1.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 132, 150, 30));
+        Wrapper__Buttons1.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 150, 30));
 
         Wrapper__input1.setBackground(new java.awt.Color(255, 255, 255));
         Wrapper__input1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -699,6 +719,26 @@ public class AdminOrder extends javax.swing.JFrame {
 
         Wrapper__Buttons1.add(Wrapper__input1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 210));
 
+        HoaDonDaLap.setBackground(new java.awt.Color(6, 214, 160));
+        HoaDonDaLap.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        HoaDonDaLap.setText("Hóa đơn đã lập");
+        HoaDonDaLap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonDaLapdeletedReceipt(evt);
+            }
+        });
+        Wrapper__Buttons1.add(HoaDonDaLap, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 150, 30));
+
+        HoaDonDaXoa.setBackground(new java.awt.Color(255, 102, 102));
+        HoaDonDaXoa.setFont(new java.awt.Font("Serif", 0, 16)); // NOI18N
+        HoaDonDaXoa.setText("Phiếu nhập đã hủy");
+        HoaDonDaXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonDaXoadeletedReceipt(evt);
+            }
+        });
+        Wrapper__Buttons1.add(HoaDonDaXoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 150, 30));
+
         Wrapper.add(Wrapper__Buttons1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 550, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -735,6 +775,8 @@ public class AdminOrder extends javax.swing.JFrame {
 
     private void ReturnBtnhome(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnBtnhome
         AdminHome a = new AdminHome();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
         a.setPositionForWin(x1, y1);
@@ -755,6 +797,7 @@ public class AdminOrder extends javax.swing.JFrame {
         for (int j = 0; j < model.getColumnCount(); j++) {
             rowArr.add(model.getValueAt(i, j).toString());
         }
+        int ProductQuantity = (int) model.getValueAt(i, 2);
         int OrderQuantity = 0;
         String OrderID = TextOrderID.getText();
         String ProductID = rowArr.get(0);
@@ -781,12 +824,12 @@ public class AdminOrder extends javax.swing.JFrame {
             }
         }
         if (check_full_filling == true) {
-            OrderDetail r = new OrderDetail(OrderID, ProductID, OrderPrice, OrderQuantity);
-            int j = OrderDetailDAO.getInstance().add(r);
-//            if (j == 0) {
-//                JOptionPane.showMessageDialog(null, "Tạo thành công nội dung đơn con", "SUCCESS ADD", JOptionPane.INFORMATION_MESSAGE);
-//                r.toString();
-//            }
+            if (OrderQuantity <= ProductQuantity) {
+                OrderDetail r = new OrderDetail(OrderID, ProductID, OrderPrice, OrderQuantity);
+                OrderDetailDAO.getInstance().add(r);
+            } else {
+                JOptionPane.showMessageDialog(null, "Không đủ hàng", "ADD FAIL", JOptionPane.WARNING_MESSAGE);
+            }
         }
         showDataRightTable();
         TotalPrice();
@@ -798,8 +841,8 @@ public class AdminOrder extends javax.swing.JFrame {
         int rows = model.getRowCount();
         System.out.println(rows);
         for (int i = 0; i < rows; i++) {
-            String priceStr = model.getValueAt(i, 3).toString();
-            String timeString = model.getValueAt(i, 2).toString();
+            String priceStr = model.getValueAt(i, 4).toString();
+            String timeString = model.getValueAt(i, 3).toString();
             int time = Integer.parseInt(timeString);
             Double price = Double.valueOf(priceStr);
 
@@ -811,7 +854,7 @@ public class AdminOrder extends javax.swing.JFrame {
     }
 
     private void XuatHangClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_XuatHangClicked
-        // Thêm giá tổng vào Receipt
+        // Thêm giá tổng vào Order
         String totalStr = TextTotalPrice.getText();
         totalStr = totalStr.substring(0, totalStr.length() - 2);
         Double total = Double.valueOf(totalStr);
@@ -824,6 +867,8 @@ public class AdminOrder extends javax.swing.JFrame {
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
+        // xóa tổng tiền
+        TextTotalPrice.setText("");
 
         // xóa ô nội dung ô text
         num.setText("");
@@ -854,16 +899,16 @@ public class AdminOrder extends javax.swing.JFrame {
         Wrapper__JScroll__ProductImport.setVisible(true);
         Wrapper__input.setVisible(true);
         Wrapper__Buttons.setVisible(true);
-        Wrapper__JScroll__Receipt.setVisible(false);
+        Wrapper__JScroll__Order.setVisible(false);
         Wrapper__Buttons1.setVisible(false);
-
+        showGreyText();
     }//GEN-LAST:event_ImportBtnClicked
 
     private void ReceiptBtnClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptBtnClicked
         Wrapper__JScroll__ProductImport.setVisible(false);
         Wrapper__input.setVisible(false);
         Wrapper__Buttons.setVisible(false);
-        Wrapper__JScroll__Receipt.setVisible(true);
+        Wrapper__JScroll__Order.setVisible(true);
         Wrapper__Buttons1.setVisible(true);
     }//GEN-LAST:event_ReceiptBtnClicked
 
@@ -908,7 +953,7 @@ public class AdminOrder extends javax.swing.JFrame {
         DefaultTableModel model4 = (DefaultTableModel) Table4.getModel();
         int rows = Table4.getRowCount();
         for (int j = rows - 1; j >= 0; j--) {
-            model4.removeRow(i);
+            model4.removeRow(j);
         }
         int hang = 0;
         ArrayList<Object[]> data = OrderDetailDAO.getInstance().BillHoaDon(TextID.getText());
@@ -972,7 +1017,7 @@ public class AdminOrder extends javax.swing.JFrame {
             Order r = new Order(OrderID, UserID, CustomerID, OrderDate);
             int i = OrderDAO.getInstance().add(r);
             if (i == 0) {
-                JOptionPane.showMessageDialog(null, "Tạo thành công phôi đơn nhập", "SUCCESS ADD", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Tạo thành công hóa đơn", "ADD SUCCESS", JOptionPane.INFORMATION_MESSAGE);
                 r.toString();
             }
         }
@@ -997,6 +1042,47 @@ public class AdminOrder extends javax.swing.JFrame {
         showDataRightTable();
     }//GEN-LAST:event_deleteItem
 
+    private void updateItem(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateItem
+        String n = String.valueOf(num.getText());
+        TableModel model = Table1.getModel();
+        int i = Table1.getSelectedRow();
+        String ProductID = model.getValueAt(i, 1).toString();
+        System.out.println(ProductID);
+        OrderDetailDAO.getInstance().updateTable1(ProductID, n);
+        showDataRightTable();
+        TotalPrice();
+        showDataRightTable();
+    }//GEN-LAST:event_updateItem
+
+    private void HoaDonDaLapdeletedReceipt(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonDaLapdeletedReceipt
+        showDataOrder();
+    }//GEN-LAST:event_HoaDonDaLapdeletedReceipt
+
+    private void HoaDonDaXoadeletedReceipt(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonDaXoadeletedReceipt
+        DefaultTableModel model = (DefaultTableModel) Table2.getModel();
+        int rows = model.getRowCount();
+        for (int i = rows - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+        ArrayList<Order> list = OrderDAO.getInstance().getDataForTableOrder(1);
+        for (int i = 0; i < list.size(); i++) {
+            Order r = list.get(i);
+            model.addRow(new Object[]{r.getOrderID(), r.getUserID(), r.getCustomerID(), r.getOrderDate()});
+        }
+    }//GEN-LAST:event_HoaDonDaXoadeletedReceipt
+
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
     public void showDataLeftTable() {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         int rows = model.getRowCount();
@@ -1020,15 +1106,16 @@ public class AdminOrder extends javax.swing.JFrame {
         ArrayList<OrderDetail> list = OrderDetailDAO.getInstance().getDataForRightTable(TextOrderID.getText());
         for (int i = 0; i < list.size(); i++) {
             OrderDetail r = list.get(i);
-            model.addRow(new Object[]{(i + 1), r.getProductID(), r.getOrderQuantity(), r.getOrderPrice()});
+            model.addRow(new Object[]{(i + 1), r.getProductID(), ProductDAO.getInstance().getNameProductFromID(r.getProductID()), r.getOrderQuantity(), r.getOrderPrice()});
         }
     }
 
     public void showGreyText() {
         //        điền ô xám
         String i = OrderDAO.getInstance().creatOrderID();
+        String text = label_avatar.getText();
         TextOrderID.setText(i);
-        TextUserID.setText("user1");
+        TextUserID.setText(text);
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         TextOrderDate.setText(date.toString());
@@ -1040,7 +1127,7 @@ public class AdminOrder extends javax.swing.JFrame {
         for (int i = rows - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        ArrayList<Order> list = OrderDAO.getInstance().getDataForTableOrder();
+        ArrayList<Order> list = OrderDAO.getInstance().getDataForTableOrder(0);
         for (int i = 0; i < list.size(); i++) {
             Order r = list.get(i);
             model.addRow(new Object[]{r.getOrderID(), r.getUserID(), r.getCustomerID(), r.getOrderDate()});
@@ -1063,6 +1150,8 @@ public class AdminOrder extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateOrderBtn;
+    private javax.swing.JButton HoaDonDaLap;
+    private javax.swing.JButton HoaDonDaXoa;
     private javax.swing.JButton ImportBtn;
     private javax.swing.JButton ImportProductBtn;
     private javax.swing.JButton ImportProductBtn1;
@@ -1102,8 +1191,8 @@ public class AdminOrder extends javax.swing.JFrame {
     private javax.swing.JPanel Wrapper__Buttons1;
     private javax.swing.JPanel Wrapper__HeadBar;
     private javax.swing.JScrollPane Wrapper__JScrollPane;
+    private javax.swing.JScrollPane Wrapper__JScroll__Order;
     private javax.swing.JScrollPane Wrapper__JScroll__ProductImport;
-    private javax.swing.JScrollPane Wrapper__JScroll__Receipt;
     private javax.swing.JPanel Wrapper__VerticalBar;
     private javax.swing.JPanel Wrapper__input;
     private javax.swing.JPanel Wrapper__input1;
@@ -1112,9 +1201,7 @@ public class AdminOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1129,7 +1216,9 @@ public class AdminOrder extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel label_avatar;
     private javax.swing.JTextField num;
     private javax.swing.JButton showReceiptBtn;
+    private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables
 }

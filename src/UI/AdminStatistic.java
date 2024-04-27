@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package UI;
 
 import BUS.ThongkeBUS;
@@ -13,8 +9,6 @@ import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 public class AdminStatistic extends javax.swing.JFrame {
 
@@ -28,6 +22,10 @@ public class AdminStatistic extends javax.swing.JFrame {
 //        jPanel1.setVisible(false);
     }
     int MousepX, MousepY;
+    private int x, y;
+    public void setUser(String id) {
+        label_avatar.setText(id);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -35,12 +33,11 @@ public class AdminStatistic extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         HeadBar = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cancel = new javax.swing.JLabel();
+        label_avatar = new javax.swing.JLabel();
         ShowTable = new javax.swing.JButton();
         VerticalBar = new javax.swing.JPanel();
         ReturnBtn = new javax.swing.JLabel();
@@ -69,11 +66,6 @@ public class AdminStatistic extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
-        jLabel4.setText("ADMIN1");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
-
         jLabel15.setFont(new java.awt.Font("Serif", 1, 8)); // NOI18N
         jLabel15.setText(" HANDCRAFTED LEATHER");
 
@@ -91,6 +83,13 @@ public class AdminStatistic extends javax.swing.JFrame {
             }
         });
 
+        label_avatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Administrator Male_1.png"))); // NOI18N
+        label_avatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_avatarSignOut(evt);
+            }
+        });
+
         javax.swing.GroupLayout HeadBarLayout = new javax.swing.GroupLayout(HeadBar);
         HeadBar.setLayout(HeadBarLayout);
         HeadBarLayout.setHorizontalGroup(
@@ -102,13 +101,11 @@ public class AdminStatistic extends javax.swing.JFrame {
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addGap(224, 224, 224)
+                .addGap(304, 304, 304)
                 .addComponent(jLabel17)
-                .addGap(371, 371, 371)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(225, 225, 225)
+                .addComponent(label_avatar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87)
                 .addComponent(cancel))
         );
         HeadBarLayout.setVerticalGroup(
@@ -121,13 +118,11 @@ public class AdminStatistic extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
             .addGroup(HeadBarLayout.createSequentialGroup()
                 .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HeadBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addComponent(cancel)
-                        .addComponent(jLabel8))
+                    .addComponent(cancel)
                     .addGroup(HeadBarLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel17)))
+                        .addComponent(jLabel17))
+                    .addComponent(label_avatar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -271,6 +266,8 @@ public class AdminStatistic extends javax.swing.JFrame {
         AdminHome a = new AdminHome();
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
+        String ID = label_avatar.getText();
+        a.setUser(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
@@ -334,6 +331,18 @@ public class AdminStatistic extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void label_avatarSignOut(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_avatarSignOut
+        int choice = JOptionPane.showConfirmDialog(null, "Đăng xuất ?", "SIGN OUT", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Login a = new Login();
+            a.setVisible(true);
+            x = this.getX();
+            y = this.getY();
+            a.setPositionForWin(x, y);
+            dispose();
+        }
+    }//GEN-LAST:event_label_avatarSignOut
+
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }
@@ -361,10 +370,11 @@ public class AdminStatistic extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel label_avatar;
+    private javax.swing.JLabel label_avatar2;
+    private javax.swing.JLabel label_avatar3;
     private com.toedter.calendar.JDateChooser start;
     // End of variables declaration//GEN-END:variables
 

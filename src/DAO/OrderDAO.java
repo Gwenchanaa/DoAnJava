@@ -44,15 +44,54 @@ public class OrderDAO {
             String sql = "insert into Orders(OrderID, UserID, CustomerID, OrderDate) "
                     + "values('" + t.getOrderID() + "', '" + t.getUserID() + "', '" + t.getCustomerID()
                     + "', '" + t.getOrderDate() + "') ";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
+//            System.out.println(kq + " thay doi");
             JDBC.closeConnection(c);
             i = 0;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return i;
+    }
+
+    public int delete(Order r) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update Orders "
+                    + "set Statuss = 0"
+                    + "where OrderID = '" + r.getOrderID() + "' ";
+//            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+//            System.out.println(kq + " thay doi");
+            if (kq != 0) {
+//                JOptionPane.showMessageDialog(null, "Xóa thành công", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+            }
+            JDBC.closeConnection(c);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int UpdateProduct(String s) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update [dbo].[Products]\n"
+                    + "set ProductQuantity = ProductQuantity - r.OrderQuantity\n"
+                    + "from [dbo].[Products] as p\n"
+                    + "join [dbo].[OrderDetails] as r\n"
+                    + "on p.ProductID = r.ProductID "
+                    + "where OrderID = '" + s + "'";
+
+            int kq = st.executeUpdate(sql);
+            JDBC.closeConnection(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public String creatOrderID() {
@@ -63,11 +102,11 @@ public class OrderDAO {
             String sql = "select top 1 OrderID\n"
                     + "from Orders\n"
                     + "order by OrderID desc ";
-            System.out.println(sql);
+//            System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             if (rs.next()) {
                 String a = rs.getString("OrderID");
-                a = a.substring(6);
+                a = a.substring(2);
                 int num = Integer.valueOf(a);
                 num++;
                 i = "HD" + num;
@@ -91,9 +130,9 @@ public class OrderDAO {
                     + "set "
                     + "TotalPrice = '" + OrderPrice + "' "
                     + "where OrderID = '" + OrderID + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay đổi");
+//            System.out.println(kq + " thay đổi");
             JDBC.closeConnection(c);
 //            if (kq == 0) {
 //                JOptionPane.showMessageDialog(null, "Không tồn tại " + t.getProductID(), "INPUT WRONG", JOptionPane.WARNING_MESSAGE);
@@ -106,13 +145,19 @@ public class OrderDAO {
         return 0;
     }
 
-    public ArrayList<Order> getDataForTableOrder() {
+    public ArrayList<Order> getDataForTableOrder(int status) {
         ArrayList<Order> list = new ArrayList<>();
         try {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
-            String sql = "select * from Orders";
+            String sql = "UPDATE Orders\n"
+                    + "SET Statuss = 1\n"
+                    + "WHERE Statuss IS NULL; "
+                    + "select * "
+                    + "from Orders\n"
+                    + "where Statuss != " + status;
             ResultSet rs = st.executeQuery(sql);
+//            System.out.println(sql);
 
             while (rs.next()) {
                 String OrderID = rs.getString("OrderID");
@@ -137,7 +182,7 @@ public class OrderDAO {
             Statement st = c.createStatement();
             String sql = "select TotalPrice from Orders\n"
                     + "where OrderID = '" + ID + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             ResultSet rs = st.executeQuery(sql);
             rs.next();
             double money = rs.getDouble("TotalPrice");
@@ -150,6 +195,23 @@ public class OrderDAO {
         return moneyStr;
     }
 
+    public void updateStatus(String ID) {
+        try {
+            Connection c = JDBC.getConnection();
+            Statement st = c.createStatement();
+            String sql = "update Orders "
+                    + "set "
+                    + "Statuss = 0"
+                    + "where OrderID = '" + ID + "'";
+//            System.out.println(sql);
+            int kq = st.executeUpdate(sql);
+//            System.out.println(kq + " thay đổi");
+            JDBC.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int update(Order r) {
         try {
             Connection c = JDBC.getConnection();
@@ -160,9 +222,9 @@ public class OrderDAO {
                     + "UserID = '" + r.getUserID() + "', "
                     + "OrderDate = '" + r.getOrderDate() + "' "
                     + "where OrderID = '" + r.getOrderID() + "'";
-            System.out.println(sql);
+//            System.out.println(sql);
             int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay đổi");
+//            System.out.println(kq + " thay đổi");
             JDBC.closeConnection(c);
             if (kq != 0) {
                 JOptionPane.showMessageDialog(null, "Sửa thành công " + r.getOrderID(), "UPDATE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
@@ -173,22 +235,4 @@ public class OrderDAO {
         return 0;
     }
 
-    public int delete(Order r) {
-        try {
-            Connection c = JDBC.getConnection();
-            Statement st = c.createStatement();
-            String sql = "delete  from Orders "
-                    + "where OrderID = '" + r.getOrderID() + "' ";
-            System.out.println(sql);
-            int kq = st.executeUpdate(sql);
-            System.out.println(kq + " thay doi");
-            if (kq != 0) {
-//                JOptionPane.showMessageDialog(null, "Xóa thành công", "DELETE SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-            }
-            JDBC.closeConnection(c);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return 0;
-    }
 }
