@@ -5,6 +5,7 @@
 package UI.panel;
 
 import Model.StatisticProduct;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
      */
     public ProductStatisticPanel() {
         initComponents();
+        this.setBackground(Color.WHITE);
     }
 
     /**
@@ -34,6 +36,7 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
         Table1 = new javax.swing.JTable();
         sum = new java.awt.Label();
         sum1 = new java.awt.Label();
+        label1 = new java.awt.Label();
 
         Table1.setFont(new java.awt.Font("Serif", 0, 12)); // NOI18N
         Table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -61,22 +64,31 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
 
         sum.setText("Tổng thu nhập :");
 
+        label1.setText("THỐNG KÊ DOANH THU");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(ScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sum1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(ScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(155, 155, 155))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(ScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,6 +121,7 @@ public class ProductStatisticPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane1;
     private javax.swing.JTable Table1;
+    private java.awt.Label label1;
     private java.awt.Label sum;
     private java.awt.Label sum1;
     // End of variables declaration//GEN-END:variables

@@ -7,7 +7,8 @@ public class JDBC {
     public static Connection getConnection() {
         Connection conn = null;
 
-        String url = "jdbc:sqlserver://LAPTOP-VNOPB5Q7\\SQLEXPRESS:1433; databaseName=leatherManagerSystem;user=sa;password=123;"
+      
+          String url = "jdbc:sqlserver://LAPTOP-634PD96R\\SQLEXPRESS:1433; databaseName=leatherManagerSystem;user=sa;password=12345;"
                 + "encrypt=true;trustServerCertificate=true";
         if (conn == null) {
             try {
