@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 public class ReceiptStatisticPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form Receiptpanel
-     .getViewport().setBackground(Color.WHITE);*/
+     * Creates new form Receiptpanel .getViewport().setBackground(Color.WHITE);
+     */
     public ReceiptStatisticPanel() {
         initComponents();
         this.setBackground(Color.WHITE);
@@ -131,22 +131,40 @@ public class ReceiptStatisticPanel extends javax.swing.JPanel {
 
 //        // Thêm dữ liệu từ ArrayList vào model
         for (StatisticProduct sp : list1) {
-           Object[] rowData = { sp.getProduct().getProductID(),sp.getProduct().getProductName(),sp.getProduct().getProductQuantity()};
+            Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getProduct().getProductQuantity()};
             model.addRow(rowData);
         }
     }
-   public void load(ArrayList<StatisticProduct> list1) {
+
+    public void loadfull(ArrayList<StatisticProduct> list1) {
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
-        // Xóa tất cả các hàng trong model trước khi load dữ liệu mới
+        // Clear all rows in the model before loading new data
         model.setRowCount(0);
 
-//        // Thêm dữ liệu từ ArrayList vào model
+        // Add data from ArrayList to the model
         for (StatisticProduct sp : list1) {
-            if(sp.getQuanity()==0){
-           Object[] rowData = { sp.getProduct().getProductID(),sp.getProduct().getProductName(),sp.getProduct().getProductQuantity()};
-            model.addRow(rowData);}
+            {
+                Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getProduct().getProductQuantity()};
+                model.addRow(rowData);
+            }
         }
     }
+
+    public void load(ArrayList<StatisticProduct> list1) {
+        DefaultTableModel model = (DefaultTableModel) Table1.getModel();
+        // Clear all rows in the model before loading new data
+        model.setRowCount(0);
+
+        // Add data from ArrayList to the model
+        for (StatisticProduct sp : list1) {
+            if (sp.getProduct().getProductQuantity() == 0) {
+                Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getProduct().getProductQuantity()};
+                model.addRow(rowData);
+            }
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JScrollPane ScrollPane1;
