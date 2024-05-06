@@ -10,18 +10,18 @@ package Model;
 // */
 public class StatisticReceipt {
 
-    private Receipt receipt;
+//    private Receipt receipt;
     private Product product;
     private Integer rsquanity;
     private Double inventory;
 
-    public Receipt getReceipt() {
-        return receipt;
-    }
+//    public Receipt getReceipt() {
+//        return receipt;
+//    }
 
-    public void setReceipt(Receipt receipt) {
-        this.receipt = receipt;
-    }
+//    public void setReceipt(Receipt receipt) {
+//        this.receipt = receipt;
+//    }
 
     public Product getProduct() {
         return product;
@@ -47,8 +47,8 @@ public class StatisticReceipt {
         this.inventory = inventory;
     }
 
-    public StatisticReceipt(Receipt receipt, Product product, Integer rsquanity, Double inventory) {
-        this.receipt = receipt;
+    public StatisticReceipt( Product product, Integer rsquanity, Double inventory) {
+//        this.receipt = receipt;
         this.product = product;
         this.rsquanity = rsquanity;
         this.inventory = inventory;
@@ -56,7 +56,7 @@ public class StatisticReceipt {
 
     @Override
     public String toString() {
-        return "StatisticReceipt{" + "receipt=" + receipt + ", product=" + product + ", rsquanity=" + rsquanity + ", inventory=" + inventory + '}';
+        return "StatisticReceipt{" + ", product=" + product + ", rsquanity=" + rsquanity + ", inventory=" + inventory + '}';
     }
 
   
