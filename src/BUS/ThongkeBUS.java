@@ -13,7 +13,7 @@ public class ThongkeBUS {
     public void checkDate(Date bd, Date kt) throws IllegalArgumentException {
         //check date start , date end  start có nhỏ hơn bằng end ko
         if (bd == null || kt == null) {
-            throw new IllegalArgumentException("Vui lòng không để trống ngày khi thống kê doanh thu!! ");
+            throw new IllegalArgumentException("Vui lòng không để trống ngày khi thống kê doanh thu và chi tiêu!! ");
         }
         if (bd.compareTo(kt) > 0) {
             throw new IllegalArgumentException("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc!!");
