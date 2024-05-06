@@ -15,9 +15,10 @@ public class Product {
         this.ProductImage = ProductImage;
     }
 
-    public Product(String CategoryID, String ProductID) {
-        this.CategoryID = CategoryID;
+    public Product(String ProductID, String ProductName) {
         this.ProductID = ProductID;
+        this.ProductName = ProductName;
+
     }
 
     public Product(String ProductID, String ProductName, int ProductQuantity, double Price) {

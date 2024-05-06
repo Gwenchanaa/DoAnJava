@@ -24,10 +24,10 @@ public class DetailReceiptPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) Table1.getModel();
         // Xóa tất cả các hàng trong model trước khi load dữ liệu mới
         model.setRowCount(0);
-
+        System.out.println(model.getColumnCount());
 //        // Thêm dữ liệu từ ArrayList vào model
         for (StatisticReceipt re : list2) {
-            Object[] rowData = {re.getProduct().getProductName(),re.getProduct().getProductID(),re.getRsquanity(),re.getInventory()};
+            Object[] rowData = {re.getProduct().getProductID(),re.getProduct().getProductName(),re.getRsquanity(),re.getInventory()};
             model.addRow(rowData);
         }
     }

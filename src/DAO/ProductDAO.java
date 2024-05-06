@@ -17,7 +17,10 @@ public class ProductDAO {
         try {
             Connection c = JDBC.getConnection();
             String sql = "insert into Products(CategoryID, ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage) "
-                    + "values(?, ?, ?, ?, ?, ?)";
+                    + "values(?, ?, ?, ?, ?, ?) "
+                    + "update Products "
+                    + "set Statuss = 1 "
+                    + "where ProductID = '" + t.getProductID()+"'";
 
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, t.getCategoryID());
