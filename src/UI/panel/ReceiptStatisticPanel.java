@@ -143,7 +143,7 @@ public class ReceiptStatisticPanel extends javax.swing.JPanel {
 
         // Add data from ArrayList to the model
         for (StatisticProduct sp : list1) {
-            {
+            if (sp.getProduct().getProductQuantity() != 0){
                 Object[] rowData = {sp.getProduct().getProductID(), sp.getProduct().getProductName(), sp.getProduct().getProductQuantity()};
                 model.addRow(rowData);
             }
