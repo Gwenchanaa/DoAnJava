@@ -27,7 +27,7 @@ public class DetailReceiptPanel extends javax.swing.JPanel {
 
 //        // Thêm dữ liệu từ ArrayList vào model
         for (StatisticReceipt re : list2) {
-            Object[] rowData = {re.getReceipt().getReceiptID(),re.getProduct().getProductName(),re.getRsquanity(),re.getInventory()};
+            Object[] rowData = {re.getReceipt().getReceiptID(),re.getProduct().getProductID(),re.getProduct().getProductName(),re.getRsquanity(),re.getInventory()};
             model.addRow(rowData);
         }
     }
@@ -56,11 +56,11 @@ public class DetailReceiptPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã sản phẩm", "Sản phẩm", "Số lượng", "Tiền nhập"
+                "Mã phiếu nhập", "Mã sản phẩm", "Sản phẩm", "Số lượng", "Tiền nhập"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true
+                true, true, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
