@@ -777,6 +777,7 @@ public class AdminOrder extends javax.swing.JFrame {
         AdminHome a = new AdminHome();
         String ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         a.setVisible(true);
         int x1 = this.getX(), y1 = this.getY();
         a.setPositionForWin(x1, y1);
@@ -943,9 +944,9 @@ public class AdminOrder extends javax.swing.JFrame {
         a = model.getValueAt(i, 0).toString();
         TextID.setText(a);
         TextCustomerID2.setText(model.getValueAt(i, 2).toString());
-        TextCustomer.setText(model.getValueAt(i, 2).toString());
+        TextCustomer.setText(CustomerDAO.getInstance().getNameCustomer( model.getValueAt(i, 2).toString()));
         TextUserID2.setText(model.getValueAt(i, 1).toString());
-        TextUser.setText(model.getValueAt(i, 1).toString());
+        TextUser.setText(UserDAO.getInstance().getNameUser(model.getValueAt(i, 1).toString()));
         TextOrderDate2.setText(model.getValueAt(i, 3).toString());
         TextDate.setText(model.getValueAt(i, 3).toString());
         TextMoney.setText(OrderDAO.getInstance().DisplayBillOrder(a));
@@ -1007,7 +1008,7 @@ public class AdminOrder extends javax.swing.JFrame {
         boolean check_full_filling = true;
         if (CustomerID.equals("")) {
             TextCustomerID.requestFocus();
-            JOptionPane.showMessageDialog(null, "Không được bỏ trống nhà cung cấp", "WRONG INPUT", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Không được bỏ trống khách hàng", "WRONG INPUT", JOptionPane.WARNING_MESSAGE);
             check_full_filling = false;
         } else {
             check_full_filling = true;

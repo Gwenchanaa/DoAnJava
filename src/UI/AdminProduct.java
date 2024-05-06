@@ -568,6 +568,7 @@ public class AdminProduct extends javax.swing.JFrame {
         int x1 = this.getX(), y1 = this.getY();
         String ID = label_avatar1.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
@@ -905,6 +906,17 @@ public class AdminProduct extends javax.swing.JFrame {
         }
     }
 
+    public void setAuthorized(String a){
+
+        if ("u".equals(a.substring(0, 1))) {
+            System.out.println("user");
+            UpdateButton.setVisible(false);
+            MinusButton.setVisible(false);
+        } else {
+            System.out.println("admin");
+        }
+    }
+    
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }

@@ -44,7 +44,7 @@ public class OrderDAO {
             String sql = "insert into Orders(OrderID, UserID, CustomerID, OrderDate) "
                     + "values('" + t.getOrderID() + "', '" + t.getUserID() + "', '" + t.getCustomerID()
                     + "', '" + t.getOrderDate() + "') ";
-//            System.out.println(sql);
+            System.out.println(sql);
             int kq = st.executeUpdate(sql);
 //            System.out.println(kq + " thay doi");
             JDBC.closeConnection(c);

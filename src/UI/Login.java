@@ -215,6 +215,7 @@ public class Login extends javax.swing.JFrame {
         a.setPositionForWin(x, y);
         this.dispose();
         a.setUser(defineUser());
+        a.setAuthorized(defineUser());
     }
 
     private void BiggestPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BiggestPanelMouseDragged

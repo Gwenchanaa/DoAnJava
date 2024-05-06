@@ -1,4 +1,4 @@
-﻿create database leatherManagerSystem
+create database leatherManagerSystem
 go
 use leatherManagerSystem;
 
@@ -7,6 +7,12 @@ CustomerID nvarchar(7) not null primary key,
 CustomerName nvarchar(100) not null,
 CustomerPhone nvarchar(20) not null,
 CustomerAddress nvarchar(20) not null,
+Statuss int											--	FIX
+);
+
+create table Companies(
+CompanyID nvarchar(7) not null primary key,
+CompanyName nvarchar(100) not null,
 Statuss int											--	FIX
 );
 
@@ -64,7 +70,8 @@ UserID nvarchar(7) not null,
 ReceiptDate date not null,
 Statuss int,										--	FIX
 TotalPrice money 
-Foreign key (UserID) references [Users](UserID)
+Foreign key (UserID) references [Users](UserID),
+Foreign key (ReceiptCompany) references [Companies](CompanyID)
 );
 
 CREATE TABLE ReceiptDetails (
@@ -84,7 +91,7 @@ mã quản lý trỏ khóa ngoại vào người dùng Users
 
 -- Insert customer
 INSERT INTO Customers (CustomerID, CustomerName, CustomerPhone, CustomerAddress, Statuss)
-VALUES ('cus1', N'Nguyễn Văn A', '0123456789', N'123 Đường A', 1);
+VALUES ('cus1', N'Nguyễn Văn A', '0911111111', N'123 Đường A', 1);
 
 INSERT INTO Customers (CustomerID, CustomerName, CustomerPhone, CustomerAddress, Statuss)
 VALUES ('cus2', N'Trần Thị B', '0123456780', N'456 Đường B', 1);
@@ -96,7 +103,17 @@ INSERT INTO Customers (CustomerID, CustomerName, CustomerPhone, CustomerAddress,
 VALUES ('cus4', N'Phạm Thị D', '0123456782', N'321 Đường D', 1);
 
 INSERT INTO Customers (CustomerID, CustomerName, CustomerPhone, CustomerAddress, Statuss)
-VALUES ('cus5', N'Hoàng Văn E', '0123456783', N'654 Đường E', 1);
+VALUES ('cus5', N'Hoàng Văn E', '0922222222', N'654 Đường E', 1);
+
+-- Insert company
+INSERT INTO Companies(CompanyID, CompanyName, Statuss)
+VALUES ('cty1', N'Cty sản xuất da', 1);
+
+INSERT INTO Companies(CompanyID, CompanyName, Statuss)
+VALUES ('cty2', N'Cty dệt Sài Gòn', 1);
+
+INSERT INTO Companies(CompanyID, CompanyName, Statuss)
+VALUES ('cty3', N'Cty Cao Su Kenda', 1);
 
 -- Insert category
 INSERT INTO Categories (CategoryID, CategoryName, Statuss)
@@ -114,19 +131,19 @@ VALUES ('cate4', N'Phụ kiện', 1);
 
 -- Insert products
 INSERT INTO Products (ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage, CategoryID, Statuss)
-VALUES ('pro1', N'vi da mau den', 10, 50000, N'D:\04.PTTKhttt\images\anh1.png', 'cate1', 1);
+VALUES ('pro1', N'vi da mau den', 10, 50000, N'D:\04.PTTKhttt\images\anh1.png', 'cate4', 1);
 
 INSERT INTO Products (ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage, CategoryID, Statuss)
-VALUES ('pro2', N'that lung da bo', 5, 75000, N'D:\04.PTTKhttt\images\anh2.png', 'cate2', 1);
+VALUES ('pro2', N'that lung da bo', 5, 75000, N'D:\04.PTTKhttt\images\anh2.png', 'cate4', 1);
 
 INSERT INTO Products (ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage, CategoryID, Statuss)
-VALUES ('pro3', N'ao thun trang', 3, 120000, N'D:\04.PTTKhttt\images\anh3.png', 'cate3', 1);
+VALUES ('pro3', N'ao thun trang', 3, 120000, N'D:\04.PTTKhttt\images\anh3.png', 'cate2', 1);
 
 INSERT INTO Products (ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage, CategoryID, Statuss)
-VALUES ('pro4', N'quan jeans xanh', 8, 90000, N'D:\04.PTTKhttt\images\anh4.png', 'cate4', 1);
+VALUES ('pro4', N'quan jeans xanh', 8, 90000, N'D:\04.PTTKhttt\images\anh4.png', 'cate1', 1);
 
 INSERT INTO Products (ProductID, ProductName, ProductQuantity, ProductPrice, ProductImage, CategoryID, Statuss)
-VALUES ('pro5', N'giay the thao nam', 12, 60000, N'D:\04.PTTKhttt\images\anh5.png', 'cate5', 1);
+VALUES ('pro5', N'giay the thao nam', 12, 60000, N'D:\04.PTTKhttt\images\anh5.png', 'cate3', 1);
 
 -- Insert Users
 INSERT INTO Users (UserID, UserPassword, UserName, UserRoll)
@@ -134,9 +151,6 @@ VALUES ('user1', '123', N'Nguyễn Văn A', 'user');
 
 INSERT INTO Users (UserID, UserPassword, UserName, UserRoll)
 VALUES ('user2', '123', N'Trần Thị B', 'user');
-
-INSERT INTO Users (UserID, UserPassword, UserName, UserRoll)
-VALUES ('user3', '123', N'Lê Văn C', 'user');
 
 INSERT INTO Users (UserID, UserPassword, UserName, UserRoll)
 VALUES ('admin1', '123', N'Phạm Thị D', 'admin');

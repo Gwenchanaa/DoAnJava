@@ -489,6 +489,7 @@ public class AdminUser extends javax.swing.JFrame {
         int x1 = this.getX(), y1 = this.getY();
         String ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_home
@@ -711,7 +712,7 @@ public class AdminUser extends javax.swing.JFrame {
             model.addRow(new Object[]{c.getUserID(), c.getUserName()});
         }
     }
-
+    
     public void setPositionForWin(int x, int y) {
         this.setLocation(x, y);
     }

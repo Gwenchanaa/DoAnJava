@@ -161,4 +161,23 @@ public class CustomerDAO {
 
         return list;
     }
+    
+    public String getNameCustomer(String id){
+        String name = "";
+        try {
+            Connection c = JDBC.getConnection();
+            String sql = "select CustomerName from Customers where CustomerID = ?";
+            PreparedStatement st = c.prepareStatement(sql);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                name = rs.getString("CustomerName");
+            }
+            
+            JDBC.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
 }
