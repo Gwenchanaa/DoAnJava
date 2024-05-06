@@ -123,27 +123,33 @@ public class ThongkeDAO {
         try {
             Connection c = JDBC.getConnection();
             PreparedStatement st = c.prepareStatement("SELECT\n"
-                    + "  Receipts.ReceiptID,\n"
-                    + "  Receipts.ReceiptCompany,\n"
-                    + "  Products.ProductName,\n"
-                    + "  SUM(ReceiptDetails.ReceiptQuantity) AS TotalQuantity,\n"
-                    + "  SUM(ReceiptDetails.ReceiptPrice) AS TotalPrice\n"
+                    + "    Receipts.ReceiptID,\n"
+                    + "    Receipts.ReceiptCompany,\n"
+                    + "    Receipts.UserID,\n"
+                    + "    Receipts.ReceiptDate,\n"
+                    + "    Products.ProductID,\n"
+                    + "    Products.ProductName,\n"
+                    + "    SUM(ReceiptDetails.ReceiptQuantity) AS TotalQuantity,\n"
+                    + "    SUM(ReceiptDetails.ReceiptPrice) AS TotalPrice\n"
                     + "FROM\n"
-                    + "  Receipts\n"
+                    + "    Receipts\n"
                     + "JOIN\n"
-                    + "  ReceiptDetails ON Receipts.ReceiptID = ReceiptDetails.ReceiptID\n"
+                    + "    ReceiptDetails ON Receipts.ReceiptID = ReceiptDetails.ReceiptID\n"
                     + "JOIN\n"
-                    + "  Products ON ReceiptDetails.ProductID = Products.ProductID\n"
+                    + "    Products ON ReceiptDetails.ProductID = Products.ProductID\n"
                     + "WHERE\n"
-                    + "  Receipts.Statuss = 1\n"
-                    + "  AND Receipts.ReceiptDate>= ?\n"
-                    + "  AND Receipts.ReceiptDate <= ?\n"
+                    + "    Receipts.Statuss = 1\n"
+                    + "    AND Receipts.ReceiptDate >= ?\n"
+                    + "    AND Receipts.ReceiptDate <= ?\n"
                     + "GROUP BY\n"
-                    + "  Receipts.ReceiptID,\n"
-                    + "  Receipts.ReceiptCompany,\n"
-                    + "  Products.ProductName");
-
+                    + "    Receipts.ReceiptID,\n"
+                    + "    Receipts.ReceiptCompany,\n"
+                    + "    Receipts.UserID,\n"
+                    + "    Receipts.ReceiptDate,\n"
+                    + "    Products.ProductID,\n"
+                    + "    Products.ProductName;");
             // Set the start and end date parameters
+
             st.setDate(1, new java.sql.Date(start.getTime()));
             st.setDate(2, new java.sql.Date(end.getTime()));
 
@@ -152,11 +158,14 @@ public class ThongkeDAO {
             while (rs.next()) {
                 String ReceiptID = rs.getString("ReceiptID");
                 String ReceiptCompany = rs.getString("ReceiptCompany");
+                String UserID = rs.getString("UserID");
+                String ReceiptDate = rs.getString("ReceiptDate");
+                 String ProductID = rs.getString("ProductID");
                 String ProductName = rs.getString("ProductName");
                 double TotalPrice = rs.getDouble("TotalPrice");
                 int TotalQuantity = rs.getInt("TotalQuantity");
-                Receipt r = new Receipt(ReceiptID, ReceiptCompany, ReceiptID, ReceiptID);
-                Product p = new Product(ProductName, ProductName, TotalQuantity, TotalPrice);
+                Receipt r = new Receipt(ReceiptID, ReceiptCompany, UserID, ReceiptDate);
+                Product p = new Product(ProductID, ProductName, TotalQuantity, TotalPrice);
                 StatisticReceipt re = new StatisticReceipt(r, p, TotalQuantity, TotalPrice);
                 list2.add(re);
             }
