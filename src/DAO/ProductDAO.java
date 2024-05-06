@@ -85,7 +85,7 @@ public class ProductDAO {
             Connection c = JDBC.getConnection();
             Statement st = c.createStatement();
             String sql = "delete  from Products "
-                    + "where ProductID = '" + t.getProductID() + "' and CategoryID = '" + t.getCategoryID() + "' ";
+                    + "where ProductID = '" + t.getProductID() + "'";
 //            System.out.println(sql);
             int kq = st.executeUpdate(sql);
 //            System.out.println(kq + " thay doi");

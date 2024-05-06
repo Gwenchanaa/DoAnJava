@@ -747,12 +747,13 @@ public class AdminProduct extends javax.swing.JFrame {
         SearchButtonClicked(evt);
         DefaultTableModel model = (DefaultTableModel) Table.getModel();
         int rows = model.getRowCount();
+        System.out.println("xoaaaaaaaaaaa");
         if (rows > 1) {
             JOptionPane.showMessageDialog(null, "Click chọn dòng muốn xóa hoặc cho thêm thông tin", "DELETE SELECT", JOptionPane.WARNING_MESSAGE);
         } else {
             String ProductID = TextProductID.getText();
-            String CategoryID = TextCategoryID.getText();
-            Product p = new Product(CategoryID, ProductID);
+            String ProductName = TextProductName.getText();
+            Product p = new Product(ProductID, ProductName);
             ProductDAO.getInstance().delete(p);
             showData();
         }
