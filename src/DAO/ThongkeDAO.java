@@ -93,7 +93,7 @@ public class ThongkeDAO {
                     + "    p.ProductID, p.ProductName, p.ProductQuantity, p.ProductPrice, p.ProductImage, p.CategoryID, p.Statuss;";
 
             ResultSet rs = st.executeQuery(sql);
-
+            System.out.println(sql);
             while (rs.next()) {
                 String CategoryID = rs.getString("CategoryID");
                 String ProductID = rs.getString("ProductID");

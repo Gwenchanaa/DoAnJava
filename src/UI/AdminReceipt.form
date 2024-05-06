@@ -496,11 +496,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Serif" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nh&#xe0; cung c&#x1ea5;p"/>
+                <Property name="text" type="java.lang.String" value="ID nh&#xe0; cung c&#x1ea5;p"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="4" y="135" width="93" height="-1"/>
+                  <AbsoluteConstraints x="4" y="135" width="120" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>

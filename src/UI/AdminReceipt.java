@@ -338,8 +338,8 @@ public class AdminReceipt extends javax.swing.JFrame {
         Wrapper__input.add(TextUserID, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 70, 190, -1));
 
         LabelProductName.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        LabelProductName.setText("Nhà cung cấp");
-        Wrapper__input.add(LabelProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 135, 93, -1));
+        LabelProductName.setText("ID nhà cung cấp");
+        Wrapper__input.add(LabelProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 135, 120, -1));
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
         Wrapper__input.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 160, 190, -1));
@@ -774,6 +774,7 @@ public class AdminReceipt extends javax.swing.JFrame {
         int x1 = this.getX(), y1 = this.getY();
         String ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         a.setPositionForWin(x1, y1);
         dispose();
     }//GEN-LAST:event_ReturnBtnhome
@@ -938,9 +939,10 @@ public class AdminReceipt extends javax.swing.JFrame {
         a = model.getValueAt(i, 0).toString();
         TextID.setText(a);
         TextReceiptCompany2.setText(model.getValueAt(i, 1).toString());
-        TextCompany.setText(model.getValueAt(i, 1).toString());
+        TextCompany.setText(CompanyDAO.getInstance().getNameCompany( model.getValueAt(i, 1).toString()));
         TextUserID2.setText(model.getValueAt(i, 2).toString());
-        TextUser.setText(model.getValueAt(i, 2).toString());
+//        TextUser.setText(model.getValueAt(i, 2).toString());
+        TextUser.setText(UserDAO.getInstance().getNameUser(model.getValueAt(i, 2).toString()));
         TextReceiptDate2.setText(model.getValueAt(i, 3).toString());
         TextDate.setText(model.getValueAt(i, 3).toString());
         TextMoney.setText(ReceiptDAO.getInstance().DisplayBillReceipt(a));

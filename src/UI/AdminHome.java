@@ -37,6 +37,9 @@ public class AdminHome extends javax.swing.JFrame {
         panel_order = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        panel_company = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         panel_customer = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -306,6 +309,50 @@ public class AdminHome extends javax.swing.JFrame {
 
         content.add(panel_order);
 
+        panel_company.setBackground(new java.awt.Color(255, 255, 255));
+        panel_company.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_companyClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panel_companyenteredCustomer(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panel_companyexited(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Serif", 1, 13)); // NOI18N
+        jLabel19.setText("CÔNG TY CUNG CẤP");
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/Home_company.png"))); // NOI18N
+        jLabel20.setText("jLabel6");
+
+        javax.swing.GroupLayout panel_companyLayout = new javax.swing.GroupLayout(panel_company);
+        panel_company.setLayout(panel_companyLayout);
+        panel_companyLayout.setHorizontalGroup(
+            panel_companyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_companyLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panel_companyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(panel_companyLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
+        );
+        panel_companyLayout.setVerticalGroup(
+            panel_companyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_companyLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        content.add(panel_company);
+
         panel_customer.setBackground(new java.awt.Color(255, 255, 255));
         panel_customer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -330,10 +377,13 @@ public class AdminHome extends javax.swing.JFrame {
         panel_customerLayout.setHorizontalGroup(
             panel_customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_customerLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(panel_customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addGroup(panel_customerLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel11))
+                    .addGroup(panel_customerLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         panel_customerLayout.setVerticalGroup(
@@ -413,21 +463,21 @@ public class AdminHome extends javax.swing.JFrame {
         panel_statistic.setLayout(panel_statisticLayout);
         panel_statisticLayout.setHorizontalGroup(
             panel_statisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_statisticLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(panel_statisticLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_statisticLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         panel_statisticLayout.setVerticalGroup(
             panel_statisticLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_statisticLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -480,6 +530,7 @@ public class AdminHome extends javax.swing.JFrame {
         a.showData();
         ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         dispose();
     }//GEN-LAST:event_goToProductFrame
 
@@ -491,6 +542,7 @@ public class AdminHome extends javax.swing.JFrame {
         a.setPositionForWin(x, y);
         ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         dispose();
     }//GEN-LAST:event_panel_categoryMouseClicked
 
@@ -512,6 +564,7 @@ public class AdminHome extends javax.swing.JFrame {
         y = this.getY();
         ID = label_avatar.getText();
         a.setUser(ID);
+        a.setAuthorized(ID);
         a.setPositionForWin(x, y);
         dispose();
     }//GEN-LAST:event_goToCustomer
@@ -633,9 +686,35 @@ public class AdminHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SignOut
 
-    /**
-     * @param args the command line arguments
-     */
+    private void panel_companyClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_companyClicked
+        AdminCompany a = new AdminCompany();
+        a.setVisible(true);
+        x = this.getX();
+        y = this.getY();
+        ID = label_avatar.getText();
+        a.setUser(ID);
+        a.setAuthorized(ID);
+        a.setPositionForWin(x, y);
+        dispose();
+    }//GEN-LAST:event_panel_companyClicked
+
+    private void panel_companyenteredCustomer(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_companyenteredCustomer
+        panel_company.setBackground(new Color(238, 238, 238));
+    }//GEN-LAST:event_panel_companyenteredCustomer
+
+    private void panel_companyexited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_companyexited
+        panel_company.setBackground(Color.white);
+    }//GEN-LAST:event_panel_companyexited
+
+    public void setAuthorized(String a){
+
+        if ("u".equals(a.substring(0, 1))) {
+            System.out.println("user");
+            panel_user.setVisible(false);
+        } else {
+            System.out.println("admin");
+        }
+    }
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -657,6 +736,8 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -668,6 +749,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel label_lotus;
     private javax.swing.JLabel label_title;
     private javax.swing.JPanel panel_category;
+    private javax.swing.JPanel panel_company;
     private javax.swing.JPanel panel_customer;
     private javax.swing.JPanel panel_order;
     private javax.swing.JPanel panel_product;
